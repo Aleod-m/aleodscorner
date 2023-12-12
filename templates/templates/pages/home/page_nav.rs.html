@@ -1,0 +1,10 @@
+@use crate::utils::expendable_nav_html;
+@(expended: bool)
+
+@:expendable_nav_html(expended, "/home/page_nav", {
+  @for (id, content) in &[
+    ("#Intro", "Introduction"),
+  ] {
+    <a href=@id> @content </a>
+  }
+})

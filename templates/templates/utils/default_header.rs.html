@@ -1,0 +1,25 @@
+@use super::icons::{house_html, book_html, file_person_html, display_html};
+@(url: &str)
+
+@for (route, content) in [
+  ("home".to_string(), "Home"),
+  ("articles".to_string(), "Articles"),
+  ("projects".to_string(), "Projects"),
+  ("cv".to_string(), "CV"),
+] {
+  <button
+    class="
+      ico-button 
+    "
+    hx-get="/navigate?route=/@(route)"
+  >
+    @match route.as_str() {
+      "home" => { @:house_html() }
+      "articles" => { @:book_html() }
+      "projects" => { @:display_html() }
+      "cv" => { @:file_person_html() }
+      _ => { Something went wrong. }
+    }
+    @content
+  </button> 
+}

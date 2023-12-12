@@ -1,0 +1,133 @@
+@use super::{_competance_html, _formation_html};
+@use crate::utils::icons::{house_html, phone_html, envelope_at_html, github_html, code_slash_html, chat_html, globe_html, book_html, building_html};
+@()
+<h1 class="noprint"> Curriculum Vitae </h1>
+<h1 class="full-width center"> Progammeur </h1>
+<hr class="print"/>
+<div class="left-50" styles="grid-row: 2/3;">
+  <h2 id="About">Candidat</h2>
+  <hr class="print"/>
+    <p>Derobert-Mazure Adrien</p>
+    <p>Homme 24 ans</p>
+    <a href="https://www.github.com/AdrienDML">@:github_html() github.com/AdrienDML </a>
+    <a href="https://www.AleodsCorner.com">@:globe_html() AleodsCorner.com </a>
+</div>
+
+<div class="right-50" styles="grid-row: 2/3;">
+  <h2 >Contacts</h2>
+  <hr class="print"/>
+    <p>@:house_html() 6B allee de la Terrefort 33170 Gradignan</p>
+    <p>@:phone_html()+33617506114</p>
+    <p>@:envelope_at_html() adriendml99@@protonmail.com</p>
+</div>
+
+<span class="left-30" styles="grid-row: 3/4;">
+  <h2> @:code_slash_html() Programation </h2>
+  <hr class="print"/>
+  @:_competance_html(&[
+  ("Rust", 4),
+  ("Nix", 4),
+  ("Nushell", 4),
+  ("HTML/CSS/JS", 3),
+  ("Bash", 3),
+  ("C/C++", 3),
+  ("Python", 3),
+  ("Java", 3),
+  ("Ocaml", 2),
+  ], 5)
+</span>
+
+<span class="middle" styles="grid-row: 3/4;">
+  <h2 id="Competances"> @:chat_html() Langues</h2>
+  <hr class="print"/>
+  @:_competance_html(&[
+  ("Francais", 5),
+  ("Anglais", 4),
+  ("Allemand", 2),
+  ], 5)
+</span>
+
+<span class="right-30">
+<h2 id="SoftSkills"> Soft Skills </h2>
+<hr class="print"/>
+<h3> Interessé, curieux </h3>
+<p> Je suis aisément intéressé par des nouveaux sujets. J'aime apprendre par moi même. </p>
+<h3> Stress résistant </h3>
+<p> Je suis très peu impacté par le stress. </p>
+</span>
+
+<span class="full-width" styles="grid-row: 3/4;">
+  <h2 id="Experience">@:building_html() Experiences </h2>
+  <hr class="print"/>
+  @for (title, date, place) in &[
+  (
+  "Bénévolat Reparation d'une Grange.",
+  "1 semaine, été 2023",
+  "Belesta, Ariege.",
+  ),
+  (
+  "Bénévolat dans une ferme agricole.",
+  "2 semaines, été 2018",
+  "Brousse, Puy de dome.",
+  ),
+  (
+  "Stage d'observation.",
+  "2017",
+  "Interforges, Issoire.",
+  ),
+  ] {
+  @:_formation_html(title, date, place)
+  }
+</span>
+
+<h2 id="Formation" class="full-width"> @:book_html() Formation </h2>
+<hr class="print"/>
+@for (title, date, place) in &[
+(
+"1ère année Master Image et Son",
+"2022-2023",
+"Université de Bordeaux, Talence.",
+),
+(
+"L3 Informatique",
+"2021-2022",
+"Université de Bordeaux, Talence.",
+),
+(
+"L2 Informatique",
+"2020-2021",
+"Université de Bordeaux, Talence.",
+),
+(
+"1ère année en école d'ingénieur. Filière MATMECA",
+"2019-2020",
+"ENSEIRB-MATMECA, Talence",
+),
+(
+"CPGE PTSI-PT/L2 en Mécanique",
+"2017-2019",
+"Lycée Jean-Zay, Thiers.",
+),
+(
+"Bac S Sciences de l'ingénieur",
+"2017-2019",
+"Lycée Lafayette, Clermont-Ferrand.",
+),
+] {
+@:_formation_html(title, date, place)
+}
+
+<h2> Interets et Hobbies  </h2>
+<hr class="print"/>
+<div class="left-50">
+  <h3> Linux et l'Open Source </h3>
+  <p> J'utilise Linux sur mon odinateur personel depuis près de quatre ans. J'ai utilisé des distributions tel que Ubuntu, Archlinux et NixOs. Je préfère aussi utiliser des logiciels open source dans la mesure du possible. </p>
+  <h3> Sciences et recherche </h3>
+  <p> J'ai toujours été très attiré par les sciences et particulierement l'informatique. Je regarde des conférences et lis des articles que ce soit sur l'informatique aussi bien théorique que pratique, les mathématiques ou la physique. </p>
+</div>
+<div class="right-50">
+  <h3> Sport </h3>
+  <p> Je pratique le skateboard depuis 10 ans. Ce sport, bien que individuel, arbore des fortes valeurs d'entraide et solidarité, tout en demandant énormément de persévérance. J'ai pratiqué d'autres sport tel que le football, badminton, tennis, et la course d'orientation.</p>
+  <h3> Musique </h3>
+  <p> Je joue de la basse ainsi que des percussions et de la guitare. J'ai joué dans un groupe de jazz et dans une harmonie d'une centaine de musiciens. J'ai aussi fait des stages de musique intensive pendant 4 étés. </p>
+</div>

@@ -1,0 +1,22 @@
+@use axum::http::StatusCode;
+@use super::utils::doctype_html;
+
+@(code: StatusCode, message: &str)
+
+@:doctype_html()
+<html lang="en" class="error">
+  <head>
+    <title>Error @code.as_u16(): @code.canonical_reason().unwrap_or("error")</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="/static/error.css"/>
+  </head>
+  <body>
+    <main>
+      <h1>@code.canonical_reason().unwrap_or("error")</h1>
+      <p>Explanations: @message</p>
+      <p>We are sorry about this.
+	In a real application, this would mention the incident having
+	been logged, and giving contact details for further reporting.</p>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+@use 'sass:color';
+
+$bg:#191919;
+$fg:#f6f6ee;
+$grey:#c4c4b5;
+$green:#97e023;
+$orange:#fa8419;
+$yellow:#dfd561;
+$purple:#9c64fe;
+$red:#f3005f;
+$cyan:#57d1ea;
+$blue:#0e6172;
+$grey:#c4c4b5;
+
+// Make sass colors accessible to normal css
+:root {
+    --bg: $bg;
+    --fg: $fg;
+    --green: $green;
+    --orange: $orange;
+    --yellow: $yellow;
+    --purple: $purple;
+    --red: $red;
+    --cyan: $cyan;
+    --blue: $blue;
+    --grey: $grey;
+}

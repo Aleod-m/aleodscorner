@@ -1,0 +1,16 @@
+@(competances: &[(&str, u16)], max_lvl: u16)
+
+<div class="comp">
+  @for (comp, lvl) in competances {
+    <p class="com-desc"> @comp </p>
+    <div class="comp-lvl"> 
+      @for i in 0..max_lvl {
+        @if i < *lvl {
+        <span class="lvl on"> </span>
+        } else {
+        <span class="lvl"> </span>
+        }
+      }
+    </div> 
+  }
+</div>

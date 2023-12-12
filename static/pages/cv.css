@@ -1,0 +1,317 @@
+:root {
+  --bg: $bg;
+  --fg: $fg;
+  --green: $green;
+  --orange: $orange;
+  --yellow: $yellow;
+  --purple: $purple;
+  --red: $red;
+  --cyan: $cyan;
+  --blue: $blue;
+  --grey: $grey;
+}
+
+*:not(:hover) .on-parent-hover {
+  display: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.f-center {
+  align-items: center;
+}
+
+.print {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: a4;
+  }
+  .print {
+    display: block;
+  }
+  svg, .bi, .bi-phone {
+    color: black !important;
+    fill: black;
+  }
+  header, footer, aside, .noprint {
+    display: none;
+  }
+  hr {
+    height: 3px;
+    background-color: #191919;
+  }
+  p, h1, h2, h3, a {
+    color: #191919;
+    margin: 0 !important;
+  }
+  p, a {
+    display: flex;
+    flex-direction: row;
+    font-size: 10pt !important;
+  }
+  p > .bi, a > .bi {
+    align-self: center;
+    margin-right: 0.1em !important;
+  }
+  a {
+    text-decoration: none;
+  }
+  h3 {
+    font-size: 10pt !important;
+    font-weight: bold !important;
+  }
+  h2 {
+    display: flex;
+    flex-direction: row;
+    font-size: 12pt !important;
+  }
+  h2 > .bi {
+    align-self: center;
+    margin-right: 0.5em !important;
+  }
+  h1 {
+    font-size: 14pt !important;
+  }
+  body {
+    display: grid;
+    background-image: none;
+    align-items: center;
+    overflow: hidden;
+  }
+  #content {
+    color: black !important;
+    display: grid;
+    gap: 0 0.5em;
+    grid-template-columns: [full-width-start left-50-start left-30-start left-60-start] 2fr [left-30-end right-60-start middle-start] 1fr [left-50-end right-50-start] 1fr [left-60-end right-30-start middle-end] 2fr [full-width-end right-50-end right-30-end right-60-end] !important;
+  }
+  #content > *, #content > .full-width {
+    grid-column: full-width !important;
+  }
+  #content > .left-50 {
+    display: flex;
+    flex-direction: column;
+    grid-column: left-50 !important;
+  }
+  #content > .right-50 {
+    display: flex;
+    flex-direction: column;
+    grid-column: right-50 !important;
+  }
+  #content > .right-30 {
+    grid-column: right-30 !important;
+  }
+  #content > .right-60 {
+    grid-column: right-60 !important;
+  }
+  #content > .left-30 {
+    grid-column: left-30 !important;
+  }
+  #content > .left-60 {
+    grid-column: left-60 !important;
+  }
+  #content > .middle {
+    grid-column: middle !important;
+  }
+  #content > .center {
+    justify-self: center !important;
+  }
+  .comp {
+    display: grid !important;
+    grid-template-columns: max-content 1fr;
+  }
+  .comp > .comp-desc {
+    grid-column: 1/2;
+  }
+  .comp > .comp-lvl {
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: row;
+  }
+  .comp > .comp-lvl > .lvl {
+    sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10px !important;
+    height: 10px !important;
+    aspect-ratio: 1 !important;
+    background-color: #191919 !important;
+  }
+  .comp > .comp-lvl > .on {
+    background-color: #97e023 !important;
+    border: 3px solid #191919 !important;
+  }
+}
+:root {
+  --bg: $bg;
+  --fg: $fg;
+  --green: $green;
+  --orange: $orange;
+  --yellow: $yellow;
+  --purple: $purple;
+  --red: $red;
+  --cyan: $cyan;
+  --blue: $blue;
+  --grey: $grey;
+}
+
+*:not(:hover) .on-parent-hover {
+  display: none;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.f-center {
+  align-items: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-align: inherit;
+  font: Arial;
+}
+
+footer {
+  display: none;
+}
+
+body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#content {
+  padding: 0 10%;
+  grid-column: 2/3;
+  display: grid;
+  grid-template-columns: [h1-start] 1em [h2-start] 1em [content-start] 1fr [content-end] 0 [h1-end] 0 [h2-end] 1em;
+}
+#content > * {
+  grid-column: content;
+}
+#content > h1 {
+  grid-column: h1;
+}
+#content > h2 {
+  grid-column: h2;
+}
+
+h1, h2, h3 {
+  text-tranform: capitalize;
+}
+
+h1 {
+  font-size: 16pt;
+}
+
+h2 {
+  font-size: 14pt;
+}
+
+h3 {
+  font-size: 12pt;
+}
+
+p {
+  font-size: 11pt;
+  margin: 3px 8px;
+}
+
+/* Left right row. */
+.lr {
+  display: flex;
+  flex-direction: row;
+}
+.lr:first-child {
+  margin-right: auto;
+}
+
+/* Level Widget. */
+.comp {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.comp .comp-lvl {
+  display: flex;
+  flex-direction: row;
+  margin-left: 2em;
+}
+.comp .comp-lvl .lvl {
+  box-sizing: border-box;
+  width: 1em;
+  height: 1em;
+  background-color: #f6f6ee;
+  border-radius: 100%;
+}
+.comp .comp-lvl .on {
+  border: 3px solid #f6f6ee;
+  background-color: #97e023;
+  border-radius: 100%;
+}
+
+/* S date place. */
+.sdp {
+  display: grid;
+  grid-template-cols: 1fr 1fr;
+}
+.sdp > h3 {
+  grid-column: 1/2;
+  grid-row: 1;
+}
+.sdp > .date {
+  grid-column: 2/3;
+  grid-row: 1;
+  margin-left: auto !important;
+}
+.sdp > .place {
+  grid-row: 2;
+  grid-column: 1/3;
+}
+
+/* Timeline widget. */
+.comp {
+  display: flex;
+  flex-direction: row;
+}
+.comp .comp-lvl {
+  grid-column: 2/3;
+  display: flex;
+  flex-direction: row;
+}
+.comp .comp-lvl .lvl {
+  sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #191919 !important;
+}
+.comp .comp-lvl .on {
+  background-color: #97e023 !important;
+  border: 3px solid #191919 !important;
+}

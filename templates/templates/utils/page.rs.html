@@ -1,0 +1,44 @@
+@use super::{doctype_html, page_header_html};
+@use crate::utils::icons::{list_html};
+@(title: &str, route: &str, page_styles: Option<&str>, global_styles: bool)
+
+@:doctype_html()
+<html hx-boost="true">
+  @:page_header_html(title, global_styles, None, page_styles, route)
+  <body>
+    <header 
+      class="noprint"
+      hx-get="/@(route)/nav" 
+      hx-trigger="load, navigate from:body"
+      hx-swap="innerHTML"
+    >
+    </header>
+    <aside>
+      <nav>
+        <button class="ico-button"
+          hx-get="/@(route)/page_nav?expended=true" 
+          hx-target="closest nav" 
+          hx-swap="outerHtml"
+        >
+          @:list_html()
+        </button>
+      </nav>
+    </aside>
+
+    <footer id="footer"
+          hx-trigger="load" 
+          hx-get="/@(route)/footer"
+          hx-swap="innerHTML" 
+          hx-target="this"
+    > 
+    </footer>
+
+    <div id="content"
+          hx-trigger="load"
+          hx-get="/@(route)/content"
+          hx-swap="outerHtml" 
+          hx-target="this"
+    >
+    </div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+@use super::icons::{x_lg_html, list_html};
+@(expended: bool, route: &str, content: Content)
+
+<nav>
+@if expended {
+  <button class="ico-button"
+    hx-get="@(route)?expended=false" 
+    hx-target="closest aside" 
+    hx-swap="innerHTML"
+  >
+    @:x_lg_html() 
+  </button>
+  @:content()
+} else {
+  <button class="ico-button" 
+    hx-get="@(route)?expended=true" 
+    hx-target="closest aside" 
+    hx-swap="innerHTML"
+  >
+    @:list_html()
+  </button>
+}
+</nav>

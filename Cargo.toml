@@ -3,7 +3,29 @@ name = "server"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+members = [ "./templates" ]
+exclude = []
+
+[workspace.dependencies.axum]
+version = "0.6.20"
+features = ["ws", "headers", "query"]
 
 [dependencies]
-actix-web = "4"
+templates.path = "./templates"
+axum.workspace = true
+serde = "1.0"
+serde_derive = "1.0"
+axum-htmx = "0.4.0"
+cached = "0.46"
+hyper = "0.14.27"
+tokio = { version = "1.33.0", features = ["full"] }
+tower = "0.4.13"
+tower-http = { version = "0.4.4", features = ["fs"] }
+tower-livereload = "0.8.2"
+
+[dependencies.maud]
+version = "0.25"
+features = ["axum"]
+
+

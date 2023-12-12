@@ -1,0 +1,147 @@
+@use "cv_print";
+@import "../colors";
+@import "../utils";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    text-align: inherit;
+    font: Arial;
+}
+
+// No header and footer for the cv.
+footer {
+  display: none;
+}
+
+body {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+header {
+    @include row;
+    justify-content: center;
+}
+
+#content {
+    padding: 0 10%;
+    grid-column: 2 / 3;
+
+    display: grid;
+    grid-template-columns: 
+        [h1-start]
+        1em 
+        [h2-start]
+        1em
+        [content-start]
+        1fr 
+        [content-end]
+        0
+        [h1-end]
+        0
+        [h2-end]
+        1em 
+        ;
+    > * {
+        grid-column: content;
+    }
+    > h1 {
+        grid-column: h1;
+    }
+    > h2 {
+        grid-column: h2;
+    }
+}
+
+h1, h2, h3 {
+    text-tranform: capitalize;
+}
+
+h1 {
+    font-size: 16pt;
+}
+
+h2 {
+    font-size: 14pt;
+}
+
+h3 {
+    font-size: 12pt;
+}
+
+p {
+    font-size: 11pt;
+    margin: 3px 8px;
+}
+
+/* Left right row. */
+.lr {
+    display: flex;
+    flex-direction: row;
+
+    &:first-child {
+        margin-right: auto;
+    }
+}
+
+
+/* Level Widget. */
+.comp {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    .comp-lvl {
+        @include row;
+        margin-left: 2em;
+        .lvl {
+            box-sizing: border-box;
+            width: 1em;
+            height: 1em;
+            background-color: $fg;
+            border-radius: 100%;
+        }
+        .on {
+            border: 3px solid $fg;
+            background-color: $green;
+            border-radius: 100%;
+        }
+    }
+}
+
+/* S date place. */
+.sdp {
+    display: grid;
+    grid-template-cols: 1fr 1fr;
+    > h3 {
+        grid-column: 1/2;
+        grid-row: 1;
+    }
+     > .date {
+        grid-column: 2/3;
+        grid-row: 1;
+        margin-left: auto !important;
+    }
+    > .place{
+        grid-row: 2;
+        grid-column:1/3;
+    }
+}
+
+/* Timeline widget. */
+.comp {
+    @include row;
+    .comp-lvl {
+        grid-column: 2/3;
+        @include row;
+        .lvl {
+            sizing: border-box;
+            @include fcenter;
+            background-color: $bg !important;
+        }
+        .on {
+            background-color: $green !important;
+            border: 3px solid $bg !important; 
+        }
+    }
+}

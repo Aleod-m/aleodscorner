@@ -1,0 +1,8 @@
+p > a {
+    &:not(:last-child) {
+        margin-right: .5ch;
+    }
+    &:not(:first-child) {
+        margin-left: .5ch;
+    }
+}

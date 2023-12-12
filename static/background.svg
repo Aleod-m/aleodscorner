@@ -1,0 +1,26 @@
+<svg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'>
+  <filter id='noise'>
+    <feTurbulence 
+      type='fractalNoise' 
+      baseFrequency='1' 
+      numOctaves='1' 
+      stitchTiles='stitch'
+      result='bnoise'
+    />
+    <feBlend 
+        in="feTurbulence" 
+        in2="SourceGraphic" 
+        mode="color-burn"
+    />
+  </filter>
+  <filter id='blur'>
+    <feGaussianBlur
+        in="SourceGraphic"
+        stdDeviation=".01"
+        />
+  </filter>
+  <g filter="url(#blur)">
+  <rect y="-100" x="-100" width="600" height="600" fill="#191919"/>
+  <rect y="-100" x="-100" width="600" height="600" fill="#191919" opacity=".8" filter="url(#noise)"/>
+  </g>
+</svg>

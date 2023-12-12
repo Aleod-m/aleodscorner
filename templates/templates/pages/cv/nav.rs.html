@@ -1,0 +1,10 @@
+@use crate::utils::icons::{house_html};
+@()
+
+<button
+  class="ico-button" 
+  hx-get="/navigate?route=/home"
+> 
+  @:house_html()
+  Home
+</button>
