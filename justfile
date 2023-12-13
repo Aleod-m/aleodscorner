@@ -1,3 +1,4 @@
+set shell := ["nu", "-c"]
 
 default: 
     print "test"
