@@ -5,10 +5,12 @@ use hyper::Uri;
 use serde_derive::Deserialize;
 use templates::render_template;
 
-pub mod articles;
-mod cv;
 pub mod elements;
-pub mod home;
+
+mod articles;
+mod home;
+mod projects;
+mod cv;
 
 pub type Failable<T> = Result<T, StatusCode>;
 
@@ -16,6 +18,7 @@ pub fn add_pages(app: Router) -> axum::Router {
     app.redirect("/", "/home")
         .route("/navigate", get(navigate_route))
         .apply(home::setup_routing)
+        .apply(projects::setup_routing)
         .apply(articles::setup_routing)
         .apply(cv::setup_routing)
         .fallback(handler_404)

@@ -3,7 +3,16 @@
   craneLib,
   port,
 }: let
-  src = craneLib.cleanCargoSource (craneLib.path ../.);
+  inherit (pkgs) lib;
+  src = let 
+    templateFilter = path: _type: (__match ".*rs.html$" path) != null;
+  in lib.cleanSourceWith {
+      src = craneLib.path ../.;
+      filter = path: type: 
+        (templateFilter path type) 
+        || (craneLib.filterCargoSources path type);
+  };
+
   # Common arguments can be set here to avoid repeating them later
   commonArgs = {
     inherit src;
@@ -17,14 +26,15 @@
 
   # Build the actual crate itself, reusing the dependency
   # artifacts from above.
-  server = craneLib.buildPackage (commonArgs
+  serverBin = craneLib.buildPackage (commonArgs
     // {
       inherit cargoArtifacts;
     });
 
-  staticFiles = pkgs.runCommandLocal "copy-static" {src = ../static;} ''
+  staticFiles = pkgs.runCommandLocal "copy-static" { src = ../static; } ''
     mkdir -p $out
-    cp -r $src $out/static
+    find $src -not -name '*.css' \
+      -exec cp --parents \{\} $out/static \;
   '';
 
   styles =
@@ -38,13 +48,18 @@
         $src/pages:$out/static/pages
     '';
 
+  server = pkgs.symlinkJoin {
+    name = "server";
+    paths = [serverBin staticFiles styles];
+  };
+
   # The docker image to deploy to fly.
   dockerImage = pkgs.dockerTools.buildImage {
-    name = "AleodsCorner";
+    name = "aleods-corner";
     tag = "latest";
     copyToRoot = pkgs.buildEnv {
       name = "image-root";
-      paths = [staticFiles server pkgs.coreutils];
+      paths = [server pkgs.coreutils];
     };
     config = {
       Cmd = ["${server}/bin/server"];
@@ -57,13 +72,13 @@
 in {
 
   packages = {
-    inherit dockerImage server staticFiles;
+    inherit dockerImage server;
     default = server;
   };
 
   checks = {
     # Build the crate as part of `nix flake check` for convenience
-    inherit server;
+    inherit serverBin;
 
     # Run clippy (and deny all warnings) on the crate source,
     # again, resuing the dependency artifacts from above.

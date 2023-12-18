@@ -8,10 +8,17 @@
 
 
 /* Text */
+.h3 {
+}
 .h1, .h2, .h3 { text-tranform: capitalize; }
 .h1 { font-size: 16pt; }
-.h2 { font-size: 14pt; }
-.h3 { font-size: 12pt; }
+.h2 {
+    font-size: 14pt; 
+    margin-top: .5em;
+}
+.h3 {
+    font-size: 12pt; 
+}
 p, a { font-size: 10pt; }
 
 /* Icons */
@@ -41,27 +48,63 @@ p, a { font-size: 10pt; }
 .body {
   display: grid;
   grid-template-columns: auto 1fr;
+  margin-bottom: 2em;
 }
 
 #content {
     grid-column: 2 / 3;
     display: grid;
+    gap: 0 .5em;
     padding: 0 10%;
     grid-template-columns: 
-        [h1-start]
-        1em 
-        [h2-start]
-        1em
-        [content-start]
-        1fr 
-        [content-end h1-end h2-end]
+        [content-start left-50-start left-30-start left-60-start]
+        2fr
+        [left-30-end right-60-start middle-start]
+        1fr
+        [left-50-end right-50-start]
+        1fr
+        [left-60-end right-30-start middle-end]
+        2fr
+        [content-end right-50-end right-30-end right-60-end]
         ;
+
+    .h1 { grid-column: h1; }
+    .h2 { grid-column: h2; }
+    .h3 { grid-column: h2; }
     > {
-        * { grid-column: content; }
-        .center { align-self: center; }
+        * { 
+            grid-column: content; 
+        }
+        .full-width {
+            grid-column: content;
+        }
+        .left-50 {
+            @include col;
+            grid-column: left-50;
+        }
+        .right-50 {
+            @include col;
+            grid-column: right-50;
+        }
+        .right-30 {
+            grid-column: right-30;
+        }
+        .right-60 {
+            grid-column: right-60;
+        }
+        .left-30 {
+            grid-column: left-30;
+        }
+        .left-60 {
+            grid-column: left-60;
+        }
+        .middle {
+            grid-column: middle;
+        }
+        .center {
+            justify-self: center;
+        }
     }
-    h1 { grid-column: h1; }
-    h2 { grid-column: h2; }
 }
 
 
@@ -69,11 +112,15 @@ p, a { font-size: 10pt; }
 .comp {
     display: grid;
     grid-template-columns: max-content 1fr;
+    margin-top: .3em;
     > { 
         .comp-desc { grid-column: 1/2; }
         .comp-lvl {
             grid-column: 2/3;
             @include row;
+            justify-content: end;
+            align-items: baseline;
+            gap: 2px;
             > {
                 .lvl {
                     box-sizing: border-box;
@@ -94,10 +141,13 @@ p, a { font-size: 10pt; }
 
 .sdp {
     @include row(true);
+    align-items: baseline;
+    width: 100%;
      > .date {
-        margin-left: auto !important;
+        margin-left: auto;
     }
     > .place {
+        margin-left: 1em;
     }
 }
 

@@ -17,7 +17,6 @@
 }
 
 .g-center {
-  display: grid;
   place-content: center;
 }
 
@@ -60,6 +59,7 @@ html {
   grid-row: 1/2;
   background-color: rgba(156, 100, 254, 0.6);
   width: 100%;
+  padding: 0.5em 0;
   justify-self: center;
   font-size: 18pt;
   margin-bottom: 2em;
@@ -67,19 +67,19 @@ html {
 
 .aside {
   grid-column: 1/2;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 3px 0;
 }
 .aside > nav {
+  width: min-content;
+  height: min-content;
+  background-color: rgba(243, 0, 95, 0.4);
+  border-radius: 0 5px 5px 0;
   display: flex;
   flex-direction: column;
   padding: 0.5em;
   position: sticky;
-  top: 0;
+  top: 1em;
 }
 
 #content {
@@ -95,7 +95,7 @@ html {
 }
 
 /* Button with icon */
-.ico-button {
+.btni {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -105,27 +105,36 @@ html {
   border-radius: 5px;
   height: min-content;
   width: min-content;
+  padding: 0.5em;
+  margin: 0.2em;
 }
-.ico-button > svg {
+.btni > .bi {
   width: 1.5em;
   height: 1.5em;
-  margin-right: 0.5em;
+  display: inline;
+  color: #f6f6ee;
 }
-.ico-button:not([diabled]):hover {
+.btni:not([diabled]):hover {
   background-color: rgba(246, 246, 238, 0.1);
 }
 
-/* Link with icon */
-a {
-  display: inline-flex;
-  flex-direction: row;
-  align-items: center;
+.btni.btnt > .bi {
+  margin-right: 0.5em;
 }
-a > svg {
-  width: 1em;
-  height: 1em;
-  margin: 0.2em;
-  margin-right: 0.3em;
+
+.button {
+  background-color: transparent;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 3px solid #f6f6ee;
+  padding: 0.5em 1em;
+  width: max-content;
+  height: max-content;
+  background-color: rgba(246, 246, 238, 0.2);
+}
+.button:hover, .button:focus {
+  background-color: rgba(246, 246, 238, 0.6);
+  color: #191919;
 }
 
 .section {

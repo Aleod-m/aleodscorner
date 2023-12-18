@@ -34,4 +34,8 @@ clean:
 
 dock:
     nix build .#dockerImage
-    docker load < ./result
+    docker load -i result
+
+deploy:
+    just dock
+    fly deploy --local-only -i aleods-corner

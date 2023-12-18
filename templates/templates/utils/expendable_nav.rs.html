@@ -3,7 +3,7 @@
 
 <nav>
 @if expended {
-  <button class="ico-button"
+  <button class="btni"
     hx-get="@(route)?expended=false" 
     hx-target="closest aside" 
     hx-swap="innerHTML"
@@ -12,7 +12,7 @@
   </button>
   @:content()
 } else {
-  <button class="ico-button" 
+  <button class="btni" 
     hx-get="@(route)?expended=true" 
     hx-target="closest aside" 
     hx-swap="innerHTML"

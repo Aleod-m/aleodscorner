@@ -1,5 +1,6 @@
-use axum::response::IntoResponse;
+use axum::{response::IntoResponse, extract::Query};
 use axum_htmx::HxCurrentUrl;
+use hyper::StatusCode;
 use serde_derive::Deserialize;
 use templates::render_template;
 
@@ -14,6 +15,8 @@ pub async fn header(HxCurrentUrl(url): HxCurrentUrl) -> impl IntoResponse {
     println!("{_url}");
     render_template!(utils::default_header_html)
 }
+
+pub async fn no_nav(_: Query<NavState>) -> StatusCode {StatusCode::OK}
 
 #[derive(Deserialize)]
 pub struct NavState {

@@ -1,8 +1,7 @@
-use axum::{response::IntoResponse, routing::get, extract::Query};
-use hyper::StatusCode;
+use axum::{response::IntoResponse, routing::get};
 use templates::render_template;
 
-use super::elements::{self, NavState};
+use super::elements::{self};
 
 pub fn setup_routing(router: axum::Router) -> axum::Router {
     router
@@ -10,10 +9,9 @@ pub fn setup_routing(router: axum::Router) -> axum::Router {
         .route("/articles/header", get(elements::header))
         .route("/articles/content", get(content))
         .route("/articles/footer", get(elements::default_footer))
-        .route("/articles/nav", get(nav))
+        .route("/articles/nav", get(elements::no_nav))
 }
 
-pub async fn nav(_: Query<NavState>) -> StatusCode {StatusCode::OK}
 
 pub async fn articles() -> impl IntoResponse {
     render_template!(

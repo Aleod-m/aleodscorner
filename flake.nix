@@ -33,7 +33,7 @@
       craneLib = crane.lib.${system}.overrideToolchain fenixPkgs.stable.toolchain;
 
       # The port on wich the server operates
-      port = 8000;
+      port = 8080;
 
       app = import ./nix/app.nix {inherit pkgs craneLib port;};
     in {
@@ -50,6 +50,7 @@
           just
           dart-sass
           rust-analyzer
+          dive
         ];
 
         SERVER_PORT = port;
