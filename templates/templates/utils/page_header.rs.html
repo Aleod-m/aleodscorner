@@ -1,23 +1,21 @@
-@(title: &str, include_glob_styles: bool, icon: Option<&str>, page_styles: Option<&str>, route: &str)
+@(title: &str, route: &str, include_glob_styles: bool, icon: Option<&str>, page_styles: &str)
 
 <head id="meta">
+  <!-- Page info -->
   <title> @title </title>
   @if let Some(icon) = icon {
     <link rel="icon" href="@icon"/>
   } else {
     <link rel="icon" href="/static/imgs/icon.webp"/>
   }
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/static/pages/@(page_styles)">
+
   @if include_glob_styles {
     <link rel="stylesheet" href="/static/globals.css"/>
   }
 
-  @if let Some(styles) = page_styles {
-    <link 
-      id="page_styles"
-      hx-swap-oob="true"
-      rel="stylesheet" 
-      href="/static/pages/@(styles).css"
-    />
-  }
+  <!-- Js -->
   <script src="/static/htmx.js"></script>
 </head>

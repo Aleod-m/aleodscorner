@@ -1,5 +1,5 @@
 {
-  pgks,
+  pkgs,
   craneLib,
   port,
 }: let
@@ -7,15 +7,8 @@
   # Common arguments can be set here to avoid repeating them later
   commonArgs = {
     inherit src;
-
-    buildInputs =
-      [
-        # Add additional build inputs here
-      ]
-      ++ lib.optionals pkgs.stdenv.isDarwin [
-        # Additional darwin specific inputs can be set here
-        pkgs.libiconv
-      ];
+    # Add additional build inputs here 
+    buildInputs = [];
   };
 
   # Build *just* the cargo dependencies, so we can reuse
@@ -29,22 +22,25 @@
       inherit cargoArtifacts;
     });
 
-  staticFiles = pkgs.runCommandLocal "copy-static" {src = ./static;} ''
+  staticFiles = pkgs.runCommandLocal "copy-static" {src = ../static;} ''
     mkdir -p $out
     cp -r $src $out/static
   '';
 
   styles =
     pkgs.runCommandLocal "compile-scss" {
-      src = ./styles;
+      src = ../styles;
       nativeBuildInputs = [pkgs.dart-sass];
     } ''
       mkdir -p $out
-      sass $src:$out/static
+      sass --no-source-map \
+        $src/globals.scss:$out/static/globals.css \
+        $src/pages:$out/static/pages
     '';
 
+  # The docker image to deploy to fly.
   dockerImage = pkgs.dockerTools.buildImage {
-    name = "aws";
+    name = "AleodsCorner";
     tag = "latest";
     copyToRoot = pkgs.buildEnv {
       name = "image-root";
@@ -59,6 +55,7 @@
     };
   };
 in {
+
   packages = {
     inherit dockerImage server staticFiles;
     default = server;

@@ -1,17 +1,17 @@
 @use crate::utils::icons::arrow_clockwise_html;
+@use super::projects_html;
 @()
 
-<div id="Intro" class="row f-center"
-  style="margin-top: 10vh; margin-bottom: 10vh;"
->
+<div id="Intro" class="row f-center">
   <img class="avatar-intro" src="/static/imgs/aleod_logo.png"/>
 
   <p style="margin-left: 5px"> 
-    <a href="/about"> Adrien </a>
+    <a href="/navigate?route=/cv"> Adrien </a>
     a.k.a Aleod, I'm a french programmer living in Bordeaux, France. I'm in my 20's and currently searching for a job. </p> 
 </div>
 
-<h2 id="articles"> 
+<div class="section">
+<h2 id="articles" class="h2 | row"> 
   Recent articles
   <button class="on-parent-hover ico-button" style="margin-left: 1em;">
     @:arrow_clockwise_html()
@@ -19,15 +19,17 @@
 </h2>
 
 <div class=".col"
-  hx-get="articles"
+  hx-get="/home/articles"
+  hx-trigger="every 10s, intersect"
   hx-target="this"
-  hx-swap="afterbegin"
+  hx-swap="innerHTML"
 >
 </div>
+</div>
 
-<h2 id="projects" class="row">
-  Projects
-  <button class="on-parent-hover ico-button" style="margin-left: 1em;">
-    @:arrow_clockwise_html()
-  </button>
-<h2/>
+<div class="section">
+<h2 id="projects">
+  Projects I'm working on.
+</h2>
+@:projects_html()
+</div>

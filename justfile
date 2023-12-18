@@ -24,6 +24,10 @@ alias r := build
 run: build
     cargo run
 
+alias k := kill
+kill:
+    ps | where name =~ server | each {kill $in.pid}
+
 alias c := build 
 clean:
     rm static/**/*.css

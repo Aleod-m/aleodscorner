@@ -10,62 +10,53 @@
     @page {
         size: a4;
     }
+    /* print only */
     .print {
         display: block;
     }
-    svg, .bi, .bi-phone {
-        color: black !important;
-        fill: black;
-    }
 
-    header, footer, aside, .noprint {
+    /* normal only */
+    .header, .aside, .noprint, .footer {
         display: none;
     }
+
+    /* Icons */
+    .bi {
+        fill: $bg;
+        margin: .3em;
+    }
+
+    /* Text */
+    p, a, h1, h2, h3 {
+        @include row;
+        color: $bg;
+        margin: 0;
+    }
+    p, a, h3 { font-size: 10pt; }
+    a { text-decoration: none; }
+    h1 { font-size: 14pt; }
+    h2 { font-size: 12pt; }
+    h3 { font-weight: bold; }
+
     hr {
         height: 3px;
         background-color: $bg;
     }
-    p, h1, h2, h3, a {
-        color: $bg;
-        margin: 0 !important;
-    }
-    p, a {
-        @include row;
-        font-size: 10pt !important;
-        > .bi {
-            align-self: center;
-            margin-right: .1em !important;
-        }
-    }
-    a { text-decoration: none; }
 
-    h3 {
-        font-size: 10pt !important;
-        font-weight: bold !important;
-    }
-    h2 {
-        @include row;
-        font-size: 12pt !important;
-        > .bi {
-            align-self: center;
-            margin-right: .5em !important;
-        }
-    }
-    h1 {
-        font-size: 14pt !important;
-    }
-    body {
+    /* Layout */
+    .body {
         display: grid;
         background-image: none;
-        align-items: center;
+        place-content: center;
         overflow: hidden;
     }
+
     #content {
-        color: black !important;
+        color: black;
         display: grid;
         gap: 0 .5em;
         grid-template-columns: 
-            [full-width-start left-50-start left-30-start left-60-start] 
+            [full-width-start left-50-start left-30-start left-60-start]
             2fr
             [left-30-end right-60-start middle-start]
             1fr
@@ -74,59 +65,74 @@
             [left-60-end right-30-start middle-end]
             2fr
             [full-width-end right-50-end right-30-end right-60-end]
-            !important;
-        &> *, &> .full-width {
-            grid-column: full-width !important;
-        }
-        > .left-50 {
-            @include col;
-            grid-column: left-50 !important;
-        }
-        > .right-50 {
-            @include col;
-            grid-column: right-50 !important;
-        }
-        > .right-30 {
-            grid-column: right-30 !important;
-        }
-        > .right-60 {
-            grid-column: right-60 !important;
-        }
-        > .left-30 {
-            grid-column: left-30 !important;
-        }
-        > .left-60 {
-            grid-column: left-60 !important;
-        }
-        > .middle {
-            grid-column: middle !important;
-        }
-        > .center {
-            justify-self: center !important;
+           ;
+        > {
+            *, .full-width {
+                grid-column: full-width;
+            }
+            .left-50 {
+                @include col;
+                grid-column: left-50;
+            }
+            .right-50 {
+                @include col;
+                grid-column: right-50;
+            }
+            .right-30 {
+                grid-column: right-30;
+            }
+            .right-60 {
+                grid-column: right-60;
+            }
+            .left-30 {
+                grid-column: left-30;
+            }
+            .left-60 {
+                grid-column: left-60;
+            }
+            .middle {
+                grid-column: middle;
+            }
+            .center {
+                justify-self: center;
+            }
         }
     }
 
     .comp {
-        display: grid !important;
+        display: grid;
         grid-template-columns: max-content 1fr;
-        > .comp-desc {
-            grid-column: 1/2;
-        }
-        > .comp-lvl {
-            grid-column: 2/3;
-            @include row;
-            > .lvl {
-                sizing: border-box;
-                @include fcenter;
-                width: 10px !important;
-                height: 10px !important;
-                aspect-ratio: 1 !important;
-                background-color: $bg !important;
+        margin-top: .1em;
+        > {
+            .comp-desc {
+                grid-column: 1/2;
             }
-            > .on {
-                background-color: $green !important;
-                border: 3px solid $bg !important; 
+            .comp-lvl {
+                grid-column: 2/3;
+                margin-left: auto;
+                margin-right: 1em;
+                @include row;
+                gap: 2px;
+                > { 
+                    .lvl.on {
+                        width: 8px;
+                        height: 8px;
+                        margin: 2px;
+                        background-color: black;
+                        border: 2px solid white;
+                        outline: 2px solid black;
+                    }
+                    .lvl {
+                        align-self: center;
+                        width: 12px;
+                        height: 12px;
+                        aspect-ratio: 1;
+                        background-color: white;
+                        border: 2px solid black; 
+                    }
+                }
             }
         }
     }
+
 }

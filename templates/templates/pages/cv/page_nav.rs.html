@@ -1,7 +1,7 @@
 @use crate::utils::expendable_nav_html;
 @(expended: bool)
 
-@:expendable_nav_html(expended, "/cv/page_nav", {
+@:expendable_nav_html(expended, "/cv/nav", {
 <ul>
   @for (id, content) in &[
     ("#About", "Informations"),

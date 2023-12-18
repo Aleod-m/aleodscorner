@@ -4,6 +4,7 @@ use std::{env, net};
 use tower_http::services::ServeDir;
 use tower_livereload::LiveReloadLayer;
 
+mod hx;
 mod pages;
 
 pub mod prelude {
@@ -32,7 +33,7 @@ fn not_htmx_request<T>(req: &Request<T>) -> bool {
 }
 
 #[tokio::main]
-async fn main() -> Result<(), hyper::Error> {
+async fn main() -> Result<(), std::io::Error> {
     // Get port from environement.
     let port = match env::var("SERVER_PORT") {
         Ok(port) => port.parse().expect("Invalid port number."),
@@ -44,14 +45,14 @@ async fn main() -> Result<(), hyper::Error> {
         Ok(_) => "127.0.0.1".parse().unwrap(),
         _ => "0.0.0.0".parse().unwrap(),
     };
+    let tcp_listener = tokio::net::TcpListener::bind(net::SocketAddr::new(addr, port)).await?;
 
     let router = Router::new()
         .apply(pages::add_pages)
+        .apply(hx::add_routes)
         //.apply(data::setup_routing)
         .nest_service("/static", ServeDir::new("static"))
         .layer(LiveReloadLayer::new().request_predicate(not_htmx_request));
 
-    axum::Server::bind(&net::SocketAddr::new(addr, port))
-        .serve(router.into_make_service())
-        .await
+    axum::serve(tcp_listener, router).await
 }

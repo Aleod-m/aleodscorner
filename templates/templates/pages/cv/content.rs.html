@@ -1,8 +1,29 @@
-@use super::{_competance_html, _formation_html};
-@use crate::utils::icons::{house_html, phone_html, envelope_at_html, github_html, code_slash_html, chat_html, globe_html, book_html, building_html};
+@use super::{
+  _competance_html,
+  _formation_html
+};
+@use crate::utils::icons::{
+  house_html,
+  phone_html,
+  envelope_at_html,
+  github_html,
+  code_slash_html,
+  chat_html,
+  globe_html,
+  book_html,
+  building_html
+};
+
 @()
-<h1 class="noprint center"> Curriculum Vitae </h1>
-<h1 class="full-width center"> Programmeur </h1>
+<h1 class="h1 | noprint center"> Curriculum Vitae </h1>
+
+<button 
+  class="button | noprint" 
+  onclick="window.print();"> 
+  Printable Version.
+</button>
+
+<h1 class="h1 | full-width center"> Programmeur </h1>
 <hr class="print"/>
 <div class="left-50" styles="grid-row: 2/3;">
   <h2 id="About">Candidat</h2>
@@ -13,6 +34,7 @@
     <a href="https://www.AleodsCorner.com">@:globe_html() AleodsCorner.com </a>
 </div>
 
+
 <div class="right-50" styles="grid-row: 2/3;">
   <h2 >Contacts</h2>
   <hr class="print"/>
@@ -21,8 +43,9 @@
     <p>@:envelope_at_html() adriendml99@@protonmail.com</p>
 </div>
 
+
 <span class="left-30" styles="grid-row: 3/4;">
-  <h2> @:code_slash_html() Programmation </h2>
+  <h2 id="Competances"> @:code_slash_html() Programmation </h2>
   <hr class="print"/>
   @:_competance_html(&[
   ("Rust", 4),
@@ -38,7 +61,7 @@
 </span>
 
 <span class="middle" styles="grid-row: 3/4;">
-  <h2 id="Competances"> @:chat_html() Langues</h2>
+  <h2 class="h2"> @:chat_html() Langues</h2>
   <hr class="print"/>
   @:_competance_html(&[
   ("Francais", 5),
@@ -48,16 +71,20 @@
 </span>
 
 <span class="right-30">
-<h2 id="SoftSkills"> Soft Skills </h2>
-<hr class="print"/>
-<h3> Intéressé, curieux </h3>
-<p> Je suis aisément intéressé par des nouveaux sujets. J'aime apprendre par moi même. </p>
-<h3> Stress résistant </h3>
-<p> Je suis très peu impacté par le stress et endurant dans mes projets. </p>
+  <h2 id="SoftSkills"> Soft Skills </h2>
+  <hr class="print"/>
+  <h3 class="h3"> Intéressé, curieux </h3>
+  <p> 
+    Je suis aisément intéressé par des nouveaux sujets. J'aime apprendre par moi même. 
+  </p>
+  <h3 class="h3"> Stress résistant </h3>
+  <p> 
+    Je suis très peu impacté par le stress et endurant dans mes projets. 
+  </p>
 </span>
 
 <span class="full-width" styles="grid-row: 3/4;">
-  <h2 id="Experience">@:building_html() Expériences </h2>
+  <h2 id="Experience" class ="h2">@:building_html() Expériences </h2>
   <hr class="print"/>
   @for (title, date, place) in &[
   (
@@ -99,7 +126,7 @@
 "Université de Bordeaux, Talence.",
 ),
 (
-"1ère année en école d'ingénieur, Filière MATMECA.",
+"1ère année d'école d'ingénieur, Filière MATMECA.",
 "2019-2020",
 "ENSEIRB-MATMECA, Talence",
 ),
@@ -120,15 +147,17 @@
 <h2 class="full-width"> Intérêts et Hobbies  </h2>
 <hr class="print"/>
 <div class="left-50">
-  <h3> Linux et l'Open Source </h3>
+  <h3 class="h3"> Linux et l'Open Source </h3>
   <p> J'utilise Linux sur mon ordinateur personnel depuis près de quatre ans. J'ai utilisé des distributions tel que Ubuntu, Archlinux et NixOs. Je préfère aussi utiliser des logiciels open source dans la mesure du possible. </p>
-  <h3> Sciences et recherche </h3>
+  <h3 class="h3"> Sciences et recherche </h3>
   <p> J'ai toujours été très attiré par les sciences et particulièrement l'informatique. Je regarde des conférences et lis des articles que ce soit sur l'informatique aussi bien théorique que pratique, les mathématiques ou la physique. </p>
 </div>
 <div class="right-50">
-  <h3> Sport </h3>
+  <h3 class="h3"> Sport </h3>
   <p> Je pratique le skateboard depuis 10 ans. Ce sport, bien que individuel, arbore des fortes valeurs d'entraide et solidarité, tout en demandant énormément de persévérance. J'ai pratiqué d'autres sports tel que le football, badminton, tennis, et la course d'orientation.</p>
-  <h3> Musique </h3>
+  <h3 class="h3"> Musique </h3>
   <p> Je joue de la basse ainsi que des percussions et de la guitare. J'ai joué dans un groupe de jazz et dans une harmonie d'une centaine de musiciens. J'ai aussi fait des stages de musique intensive pendant 4 étés. </p>
-
 </div>
+  
+<h3 class="h3"> Jeux Vidéos et Développement. </h3>
+<p> Je joue aux jeux vidéos depuis mon enfance. Mes licences préférées comptent Borderlands, Celeste, Minecraft, League of Legends, CsGo, WarFork. C'est au Lycée que j'ai commencé a m'intéresser à l'aspect développement des jeux vidéos. J'ai exploré des moteurs tels que Unity, Heaps, Godot, et aujourd'hui Bevy. J'ai aussi exploré les API graphiques OpenGl et Vulkan.</p

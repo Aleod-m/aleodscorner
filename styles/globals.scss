@@ -2,28 +2,51 @@
 @import "colors";
 @import "utils";
 
+:root {
+    --bg: $bg;
+    --fg: $fg;
+    --green: $green;
+    --orange: $orange;
+    --yellow: $yellow;
+    --purple: $purple;
+    --red: $red;
+    --cyan: $cyan;
+    --blue: $blue;
+    --grey: $grey;
+}
+
+html {
+    scroll-behaviour: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
     color: $fg;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    filter: none;
 }
 
-body {
+/* Page layout. */
+.body {
     display: grid;
-    grid-template-column: auto 1fr;
-    grid-template-row: auto 1fr auto;
+    height: 100vh;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: max-content auto max-content;
     background-image: url("/static/background.svg");
     background-size: 500px;
 }
 
-header {
+.header {
     grid-column: 1/3;
     grid-row: 1/2;
+    background-color: fade-out($purple, .4);
+    width: 100%;
+    justify-self: center;
+    font-size: 18pt;
+    margin-bottom: 2em;
 }
 
-aside {
+.aside {
     grid-column: 1/2;
     width: 100%;
     max-width: 100%;
@@ -32,33 +55,12 @@ aside {
     display: flex;
     flex-direction: column;
     gap: 3px 0;
-    nav {
+    > nav { 
         @include col;
         padding: .5em;
-    }
-    > nav { 
         position: sticky;
         top: 0;
     }
-}
-
-.ico-button {
-    @include row;
-    align-items: center;
-    background-color: transparent;
-    border-style: none;
-    border-radius: 5px;
-    height: min-content;
-    width: min-content;
-    > svg {
-        @include sq(2em);
-        margin: .2em;
-        margin-right: .3em;
-    }
-    @include hover {
-        background-color: fade-out($fg, .9);
-    }
-
 }
 
 #content {
@@ -66,22 +68,44 @@ aside {
     grid-row: 2/3;
 }
 
-footer {
+.footer {
     grid-row: 3/4;
+    display: grid;
+    background-color: fade-out($cyan, .6);
+    padding-bottom: auto;
 }
 
-h2 {
+
+/* Button with icon */
+.ico-button {
     @include row;
+    align-items: center;
+    background-color: transparent;
+    text-decoration: none;
+    border-style: none;
+    border-radius: 5px;
+    height: min-content;
+    width: min-content;
+    > svg {
+        @include sq(1.5em);
+        margin-right: .5em;
+    }
+    @include hover {
+        background-color: fade-out($fg, .9);
+    }
 }
 
-h3 {
-    @include row;
+/* Link with icon */
+a {
+    @include row(true);
+    align-items: center;
+    > svg {
+        @include sq(1em);
+        margin: .2em;
+        margin-right: .3em;
+    }
 }
 
-.htmx-indicator {
-    display:none;
-}
-
-.htmx-request .my-indicator {
-    display:inline;
+.section {
+    @include mtb(2em);
 }
