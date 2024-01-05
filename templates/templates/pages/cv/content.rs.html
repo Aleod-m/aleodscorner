@@ -3,8 +3,12 @@
   _formation_html
 };
 @use crate::utils::icons::{
+  person_vcard_html,
+  hourglass_html,
+  person_html,
+  lightbulb_html,
   house_html,
-  phone_html,
+  telephone_html,
   envelope_at_html,
   github_html,
   code_slash_html,
@@ -16,9 +20,6 @@
 
 @()
 <!-- Mettre des logo en plus 
-soft skill -> ampoule.
-contact -> cardboard.
-Candidat -> person.
 -->
 <button 
   class="button | noprint center content full-width" 
@@ -30,26 +31,18 @@ Candidat -> person.
 
 
 <h1 class="h1 | full-width center"> Programmeur </h1>
-<div class="left-50">
-  <h2 class="h2" id="About">Candidat</h2>
+<div class="left-30 | f col">
+  <h2 class="h2" id="About"> @:person_html() Candidat</h2>
   <hr/>
-    <p>Derobert-Mazure Adrien</p>
-    <p>24 ans</p>
-    <a href="https://www.github.com/AdrienDML">@:github_html() github.com/AdrienDML </a>
-    <a href="https://www.AleodsCorner.com">@:globe_html() AleodsCorner.com </a>
-</div>
-
-
-<div class="right-50">
-  <h2 class="h2">Contacts</h2>
-  <hr/>
+    <p>Derobert-Mazure Adrien 24 ans</p>
     <p>@:house_html() 6B allée de la Terrefort 33170 Gradignan</p>
-    <p>@:phone_html()+33617506114</p>
-    <p>@:envelope_at_html() adriendml99@@protonmail.com</p>
+    <a href="tel:+33617506114">@:telephone_html()+33617506114</a>
+    <a href="mailto:adriendml99@@protonmail.com" > @:envelope_at_html() adriendml99@@protonmail.com </a>
+    <a href="https://www.github.com/AdrienDML">@:github_html()github.com/AdrienDML</a>
+    <a href="https://www.AleodsCorner.com">@:globe_html()AleodsCorner.com</a>
 </div>
 
-
-<span class="left-30"> 
+<span class="middle"> 
   <h2 class="h2" id="Competances"> @:code_slash_html() Programmation </h2>
   <hr/>
   @:_competance_html(&[
@@ -65,7 +58,7 @@ Candidat -> person.
   ], 5)
 </span>
 
-<span class="middle">
+<span class="right-30">
   <h2 class="h2"> @:chat_html() Langues</h2>
   <hr/>
   @:_competance_html(&[
@@ -75,13 +68,15 @@ Candidat -> person.
   ], 5)
 </span>
 
-<span class="right-30">
-  <h2 id="SoftSkills" class="h2"> Soft Skills </h2>
-  <hr/>
+<h2 id="SoftSkills" class="h2 | full-width"> @:lightbulb_html() Soft Skills </h2>
+<hr class="full-width"/>
+<span class="left-50">
   <h3 class="h3"> Intéressé, curieux </h3>
   <p> <!-- reformule moi meme. -->
     Je suis aisément intéressé par des nouveaux sujets. J'aime apprendre par moi même. 
   </p>
+</span>
+<span class="right-50">
   <h3 class="h3"> Stress résistant </h3> <!-- A refaire -->
   <p> 
     Je suis très peu impacté par le stress et endurant dans mes projets. 
@@ -146,10 +141,10 @@ Candidat -> person.
 "Lycée Lafayette, Clermont-Ferrand.",
 ),
 ] {
-@:_formation_html(title, date, place)
+  @:_formation_html(title, date, place)
 }
 
-<h2 class="h2 | content full-width"> Intérêts et Hobbies  </h2>
+<h2 class="h2 | content full-width"> @:hourglass_html() Intérêts et Hobbies  </h2>
 <hr/>
 <div class="left-50">
   <h3 class="h3"> Linux et l'Open Source </h3>
@@ -165,6 +160,6 @@ Candidat -> person.
 </div>
   
 <div class="full-width noprint">
-<h3 class="h3"> Jeux Vidéos et Développement. </h3>
-<p> Je joue aux jeux vidéos depuis mon enfance. Mes licences préférées comptent Borderlands, Celeste, Minecraft, League of Legends, CsGo, WarFork. C'est au Lycée que j'ai commencé a m'intéresser à l'aspect développement des jeux vidéos. J'ai exploré des moteurs tels que Unity, Heaps, Godot, et aujourd'hui Bevy. J'ai aussi exploré les API graphiques OpenGl et Vulkan.</p
+  <h3 class="h3"> Jeux Vidéos et Développement. </h3>
+  <p> Je joue aux jeux vidéos depuis mon enfance. Mes licences préférées comptent Borderlands, Celeste, Minecraft, League of Legends, CsGo, WarFork. C'est au Lycée que j'ai commencé a m'intéresser à l'aspect développement des jeux vidéos. J'ai exploré des moteurs tels que Unity, Heaps, Godot, et aujourd'hui Bevy. J'ai aussi exploré les API graphiques OpenGl et Vulkan.</p
 </div>

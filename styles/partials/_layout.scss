@@ -1,0 +1,73 @@
+@use "../partials/variables" as * ;
+
+@mixin row() {
+    flex-direction: row; 
+}
+
+@mixin col() {
+    flex-direction: column; 
+}
+
+@mixin f($inline: false) {
+    @if $inline {
+     display: inline-flex;
+    } @else {
+      display: flex;
+    }
+
+    &.row { @include row(); }
+    &.col { @include col(); }
+
+    &.center {
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.if { @include f(true); }
+.f { @include f(); }
+
+/* Grid Layout solutions. */
+@mixin g() {
+    display: grid;
+    &.center { place-content: center; }
+    /* Gaps in grid */
+    @each $name, $size in $sizes {
+        &.gap-#{$name} { gap: $size; }
+        &.rgap-#{$name} { row-gap: $size; }
+        &.cgap-#{$name} { column-gap: $size; }
+    }
+}
+
+.g { @include g(); }
+
+/* A helper class to layout with two or three columns. */
+.g_cols {
+    @include g();
+    grid-template-columns: 
+        [content-start left-50-start left-30-start left-60-start]
+        2fr
+        [left-30-end right-60-start middle-start]
+        1fr
+        [left-50-end right-50-start]
+        1fr
+        [left-60-end right-30-start middle-end]
+        2fr
+        [content-end right-50-end right-30-end right-60-end]
+        ;
+    > {
+        * { 
+            grid-column: content; 
+        }
+        @each $name in [right, left] {
+            @each $nb in [30, 50, 60] {
+                .#{$name}-#{$nb} {
+                    grid-column: #{$name}-#{$nb};
+                }
+            }
+        }
+        .middle {
+            grid-column: middle;
+        }
+    }
+}

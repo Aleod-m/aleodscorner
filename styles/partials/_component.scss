@@ -1,0 +1,11 @@
+@mixin hover {
+    &:not([diabled]):hover {
+        @content
+    }
+}
+
+@mixin tooltip {
+    &:not([diabled]):hover > #tooltip {
+        @content
+    }
+}

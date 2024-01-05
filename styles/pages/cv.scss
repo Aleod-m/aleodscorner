@@ -1,5 +1,5 @@
-@import "../colors";
-@import "../utils";
+@use "../partials/variables" as *;
+@use "../partials/layout" as *;
 
 * {
     text-align: inherit;
@@ -79,11 +79,9 @@ p, a { font-size: 10pt; }
             grid-column: content;
         }
         .left-50 {
-            @include col;
             grid-column: left-50;
         }
         .right-50 {
-            @include col;
             grid-column: right-50;
         }
         .right-30 {
@@ -116,8 +114,9 @@ p, a { font-size: 10pt; }
     > { 
         .comp-desc { grid-column: 1/2; }
         .comp-lvl {
-            grid-column: 2/3;
+            @include f(true);
             @include row;
+            grid-column: 2/3;
             justify-content: end;
             align-items: baseline;
             gap: 2px;
@@ -140,7 +139,8 @@ p, a { font-size: 10pt; }
 }
 
 .sdp {
-    @include row(true);
+    @include row();
+    @include f(true);
     align-items: baseline;
     width: 100%;
      > .date {

@@ -1,0 +1,23 @@
+@mixin sq($size, $rounding: 0) {
+    width: $size;
+    height: $size;
+    @if $rounding != 0 {
+        border-radius: 100%; 
+    }
+}
+
+@mixin pill($w, $h) {
+    width: $w;
+    height: $h;
+    border-radius: 100%; 
+}
+
+@mixin circle($size) {
+    @include sq($size, $rounding: 100%);
+}
+
+*:not(:hover) {
+    .on-parent-hover {
+        display: none;
+    }
+}

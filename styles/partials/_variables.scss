@@ -1,0 +1,63 @@
+$sizes: (
+    "1": 0.25rem,
+    "2": 0.5rem,
+    "3": 0.75rem,
+    "4": 1rem,
+    "5": 1.25rem,
+    "6": 1.5rem,
+    "7": 1.75rem,
+    "8": 2rem,
+    "9": 2.5rem,
+    "10": 3rem,
+    "11": 4rem,
+    "12": 5rem,
+    "13": 6rem,
+    "14": 8rem,
+    "15": 10rem,
+);
+
+$s1: 0.25rem;
+$s2: 0.5rem;
+$s3: 0.75rem;
+$s4: 1rem;
+$s5: 1.25rem;
+$s6: 1.5rem;
+$s7: 1.75rem;
+$s8: 2rem;
+$s9: 2.5rem;
+$s10: 3rem;
+$s11: 4rem;
+$s12: 5rem;
+$s13: 6rem;
+$s14: 8rem;
+$s15: 10rem;
+
+
+$colors: (
+    "bg":     #191919,
+    "fg":     #f6f6ee,
+    "grey":   #c4c4b5,
+    "green":  #97e023,
+    "orange": #fa8419,
+    "yellow": #dfd561,
+    "purple": #9c64fe,
+    "red":    #f3005f,
+    "cyan":   #57d1ea,
+    "blue":   #0e6172,
+);
+
+$bg:     #191919;
+$fg:     #f6f6ee;
+$grey:   #c4c4b5;
+$green:  #97e023;
+$orange: #fa8419;
+$yellow: #dfd561;
+$purple: #9c64fe;
+$red:    #f3005f;
+$cyan:   #57d1ea;
+$blue:   #0e6172;
+
+@each $clr, $val in $colors {
+    .clr-#{$clr} { color: $clr }
+    .bclr-#{$clr} { background-color: $clr }
+}

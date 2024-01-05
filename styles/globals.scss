@@ -1,18 +1,17 @@
 @use "sass:color";
-@import "colors";
-@import "utils";
+@use "partials/variables" as *;
+@use "partials/layout" as *;
+@use "partials/shape" as *;
+@use "partials/spacing" as *;
+@use "partials/component" as *;
 
 :root {
-    --bg: $bg;
-    --fg: $fg;
-    --green: $green;
-    --orange: $orange;
-    --yellow: $yellow;
-    --purple: $purple;
-    --red: $red;
-    --cyan: $cyan;
-    --blue: $blue;
-    --grey: $grey;
+    @each $clr, $val in $colors {
+        --clr-#{$clr} { color: $clr }
+    }
+    @each $size, $val in $colors {
+        --s-#{$size}: $val;
+    }
 }
 
 html {
@@ -32,8 +31,10 @@ html {
     height: 100vh;
     grid-template-columns: auto 1fr;
     grid-template-rows: max-content auto max-content;
+    background-color: $bg;
     background-image: url("/static/background.svg");
-    background-size: 500px;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
 }
 
 .header {
@@ -78,6 +79,7 @@ html {
 
 /* Button with icon */
 .btni {
+    @include f;
     @include row;
     align-items: center;
     background-color: transparent;
@@ -118,5 +120,5 @@ html {
 }
 
 .section {
-    @include mtb(2em);
+    @include mv($s4);
 }

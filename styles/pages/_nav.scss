@@ -1,8 +1,5 @@
-@import "../utils";
-
 // Page navigation.
 aside > nav {
-    @include col;
     align-items: end;
     > a  {
         font-size: 16px;

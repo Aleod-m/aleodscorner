@@ -1,5 +1,5 @@
-@import "../colors";
-@import "../utils";
+@use "../partials/variables" as *;
+@use "../partials/layout" as *;
 
 .print {
     display: none;
@@ -28,6 +28,7 @@
 
     /* Text */
     p, a, h1, h2, h3 {
+        @include f;
         @include row;
         color: $bg;
         margin: 0;
@@ -39,16 +40,17 @@
     a { text-decoration: none; }
 
     hr {
-        height: 1px;
+        height: 2px;
         background-color: $bg;
+        border: none;
     }
 
     /* Layout */
     .body {
         display: grid;
         background-image: none;
+        background-color: white;
         place-content: center;
-        overflow: hidden;
     }
 
     #content {
@@ -71,10 +73,12 @@
                 grid-column: full-width;
             }
             .left-50 {
+                @include f;
                 @include col;
                 grid-column: left-50;
             }
             .right-50 {
+                @include f;
                 @include col;
                 grid-column: right-50;
             }
@@ -111,6 +115,7 @@
                 grid-column: 2/3;
                 margin-left: auto;
                 margin-right: 1em;
+                @include f;
                 @include row;
                 gap: 2px;
                 > { 

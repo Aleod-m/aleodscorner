@@ -9,6 +9,7 @@ watch:
         -w src \
         -w templates \
         -w styles \
+        -w static \
         -s "just run" 
 
 
@@ -30,9 +31,10 @@ kill:
 
 alias c := build 
 clean:
-    rm static/**/*.css
+    try {rm static/**/*.css}
 
 dock:
+    just clean
     nix build .#dockerImage
     docker load -i result
 
