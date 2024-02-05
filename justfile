@@ -29,15 +29,13 @@ alias k := kill
 kill:
     ps | where name =~ server | each {kill $in.pid}
 
-alias c := build 
-clean:
-    try {rm static/**/*.css}
-
-dock:
-    just clean
+db:
     nix build .#dockerImage
     docker load -i result
+dr:
+    @just db
+    docker run -d --rm --publish 8080:8080 aleods-corner:latest 
 
 deploy:
-    just dock
+    just db
     fly deploy --local-only -i aleods-corner

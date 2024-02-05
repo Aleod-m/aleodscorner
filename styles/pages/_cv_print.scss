@@ -101,6 +101,10 @@
                 justify-self: center;
             }
         }
+        a {
+            color: $bg;
+
+        }
     }
 
     .comp {
@@ -124,6 +128,9 @@
         }
         hr {
             background-color: $fg;
+        }
+        .bi {
+            fill: $fg;
         }
         .comp > {
             @include loading_bar_color("lvl", $cyan);
