@@ -12,15 +12,13 @@ exclude = []
 version = "0.7"
 features = ["ws", "query"]
 
-[workspace.dependencies]
-serde = "1.0"
-serde_derive = "1.0"
-
+[workspace.dependencies.serde]
+version = "1.0"
+features = ["derive"]
 
 [dependencies]
 axum.workspace = true
 serde.workspace = true
-serde_derive.workspace = true
 templates.path = "./templates"
 data.path  = "./data" 
 axum-htmx = "0.5.0"
@@ -29,6 +27,7 @@ cached = "0.46"
 hyper = "1.0"
 tower = "0.4.13"
 tower-livereload = "0.9"
+
 
 [dependencies.tower-http]
 version = "0.5"

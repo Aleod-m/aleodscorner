@@ -1,7 +1,7 @@
 use axum::{response::IntoResponse, extract::Query};
 use axum_htmx::HxCurrentUrl;
 use hyper::StatusCode;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 use templates::render_template;
 
 pub async fn default_footer() -> impl IntoResponse {
@@ -16,9 +16,9 @@ pub async fn header(HxCurrentUrl(url): HxCurrentUrl) -> impl IntoResponse {
     render_template!(utils::default_header_html)
 }
 
-pub async fn no_nav(_: Query<NavState>) -> StatusCode {StatusCode::OK}
+pub async fn no_nav(_: Query<SideBarState>) -> StatusCode {StatusCode::OK}
 
-#[derive(Deserialize)]
-pub struct NavState {
-    pub expended: bool,
+#[derive(Deserialize, Default)]
+pub struct SideBarState {
+    pub expanded: bool,
 }

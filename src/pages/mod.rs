@@ -2,7 +2,7 @@ use crate::prelude::*;
 use axum::{extract::Query, http::StatusCode, response::IntoResponse, routing::get, Router};
 use axum_htmx::{HxEvent, HxLocation, HxResponseTrigger, TriggerMode};
 use hyper::Uri;
-use serde_derive::Deserialize;
+use serde::Deserialize;
 use templates::render_template;
 
 pub mod elements;

@@ -1,10 +1,9 @@
-@use super::icons::{x_lg_html, list_html};
-@(expended: bool, route: &str, content: Content)
+@use super::icons::x_lg_html;
+@(expended: bool, route: &str, icon: Content, content: Content)
 
-<nav>
 @if expended {
   <button class="btni"
-    hx-get="@(route)?expended=false" 
+    hx-get="@(route)?expanded=false" 
     hx-target="closest aside" 
     hx-swap="innerHTML"
   >
@@ -13,11 +12,10 @@
   @:content()
 } else {
   <button class="btni" 
-    hx-get="@(route)?expended=true" 
+    hx-get="@(route)?expanded=true" 
     hx-target="closest aside" 
     hx-swap="innerHTML"
   >
-    @:list_html()
+  @:icon()
   </button>
 }
-</nav>

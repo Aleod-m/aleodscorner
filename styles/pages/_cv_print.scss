@@ -1,23 +1,23 @@
 @use "../partials/variables" as *;
 @use "../partials/layout" as *;
+@use "../partials/shape" as *;
+@use "../partials/component" as *;
 
 .print {
     display: none;
 }
 
-
 @media print {
-    @page {
-        size: a4;
-    }
+    @page{ size: a4;}
     /* print only */
+    .header, .aside, .footer {
+        display: none; 
+    }
+    .no-print, .content.no-print {
+        display: none;
+    }
     .print {
         display: block;
-    }
-
-    /* normal only */
-    .header, .aside, .noprint, .footer {
-        display: none;
     }
 
     /* Icons */
@@ -28,7 +28,7 @@
 
     /* Text */
     p, a, h1, h2, h3 {
-        @include f;
+        @include f(true);
         @include row;
         color: $bg;
         margin: 0;
@@ -53,7 +53,7 @@
         place-content: center;
     }
 
-    #content {
+    .content {
         color: black;
         display: grid;
         gap: 0 .5em;
@@ -111,32 +111,22 @@
             .comp-desc {
                 grid-column: 1/2;
             }
-            .comp-lvl {
+            @include loading_bar($fg, "lvl") {
                 grid-column: 2/3;
-                margin-left: auto;
-                margin-right: 1em;
-                @include f;
-                @include row;
-                gap: 2px;
-                > { 
-                    .lvl.on {
-                        width: 8px;
-                        height: 8px;
-                        margin: 2px;
-                        background-color: black;
-                        border: 2px solid white;
-                        outline: 2px solid black;
-                    }
-                    .lvl {
-                        align-self: center;
-                        width: 12px;
-                        height: 12px;
-                        aspect-ratio: 1;
-                        background-color: white;
-                        border: 2px solid black; 
-                    }
-                }
             }
+        }
+    }
+
+    .content.colors {
+        height: 100%;
+        p, a, h1, h2, h3 {
+            color: $fg;
+        }
+        hr {
+            background-color: $fg;
+        }
+        .comp > {
+            @include loading_bar_color("lvl", $cyan);
         }
     }
 

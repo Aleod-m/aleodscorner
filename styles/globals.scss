@@ -7,10 +7,10 @@
 
 :root {
     @each $clr, $val in $colors {
-        --clr-#{$clr} { color: $clr }
+        --clr-#{$clr}: #{$val};
     }
-    @each $size, $val in $colors {
-        --s-#{$size}: $val;
+    @each $size, $val in $sizes {
+        --s-#{$size}: #{$val};
     }
 }
 

@@ -1,7 +1,7 @@
 use axum::{extract::Query, response::IntoResponse, routing::get};
 use templates::render_template;
 
-use super::elements::{self, NavState};
+use super::elements::{self, SideBarState};
 
 pub fn setup_routing(router: axum::Router) -> axum::Router {
     router
@@ -9,7 +9,7 @@ pub fn setup_routing(router: axum::Router) -> axum::Router {
         .route("/home/header", get(elements::header))
         .route("/home/content", get(content))
         .route("/home/footer", get(elements::default_footer))
-        .route("/home/nav", get(page_nav))
+        .route("/home/aside", get(page_nav))
         .route("/home/articles", get(articles))
 }
 
@@ -37,6 +37,6 @@ pub async fn articles() -> impl IntoResponse {
     render_template!(pages::home::articles_html, articles)
 }
 
-pub async fn page_nav(Query(NavState { expended }): Query<NavState>) -> impl IntoResponse {
-    render_template!(pages::home::page_nav_html, expended)
+pub async fn page_nav(state: Option<Query<SideBarState>>) -> impl IntoResponse {
+    render_template!(pages::home::page_nav_html, state.unwrap_or_default().expanded)
 }

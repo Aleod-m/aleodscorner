@@ -3,14 +3,11 @@
 <div class="comp | g mt-3">
   @for (comp, lvl) in competances {
     <p class="com-desc"> @comp </p>
-    <div class="comp-lvl"> 
-      @for i in 0..max_lvl {
-        @if i < *lvl {
-        <span class="lvl on"> </span>
-        } else {
-        <span class="lvl"> </span>
-        }
-      }
+    <div class="bar-lvl"> 
+      <span class="bg"> 
+        <span class="lvl" style="width: @((*lvl as f32) / (max_lvl as f32) * 100f32)%;"> 
+        </span>
+      </span>
     </div> 
   }
 </div>

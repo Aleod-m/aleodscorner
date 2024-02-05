@@ -1,0 +1,157 @@
+@use super::{
+  _competance_html,
+  _formation_html,
+};
+@use crate::utils::icons::{
+  person_vcard_html,
+  hourglass_html,
+  person_html,
+  lightbulb_html,
+  house_html,
+  telephone_html,
+  envelope_at_html,
+  github_html,
+  code_slash_html,
+  chat_html,
+  globe_html,
+  book_html,
+  building_html
+};
+
+@(ty: &str)
+<div class="content | no-print">
+  <h1 class="h1 | full-width center"> Curriculum Vitae </h1>
+  <h1 class="h1 | full-width center"> Programmeur </h1>
+  <span class="left-30 | f col">
+    <h2 class="h2" id="About"> @:person_html() Candidat</h2>
+    <hr/>
+      <p>Derobert-Mazure Adrien 24 ans</p>
+      <p>@:house_html() 6B allée de la Terrefort 33170 Gradignan</p>
+      <a href="tel:+33617506114">@:telephone_html()+33617506114</a>
+      <a href="mailto:adriendml99@@protonmail.com" > @:envelope_at_html() adriendml99@@protonmail.com </a>
+      <a href="https://www.github.com/Aleod-m">@:github_html()github.com/Aleod-m</a>
+      <a href="https://www.AleodsCorner.com">@:globe_html()AleodsCorner.com</a>
+  </span>
+
+  <span class="middle"> 
+    <h2 class="h2" id="Competances"> @:code_slash_html() Programmation </h2>
+    <hr/>
+    @:_competance_html(&[
+    ("Rust", 4),
+    ("Nix", 4),
+    ("Nushell", 4),
+    ("HTML/CSS/JS", 3),
+    ("Bash", 3),
+    ("C/C++", 3),
+    ("Python", 3),
+    ("Java", 3),
+    ("Ocaml", 2),
+    ], 5)
+  </span>
+
+  <span class="right-30">
+    <h2 class="h2"> @:chat_html() Langues</h2>
+    <hr/>
+    @:_competance_html(&[
+    ("Francais", 5),
+    ("Anglais", 4),
+    ("Allemand", 2),
+    ], 5)
+  </span>
+
+  <h2 id="SoftSkills" class="h2 | full-width"> @:lightbulb_html() Soft Skills </h2>
+  <hr class="full-width"/>
+  <span class="left-50">
+    <h3 class="h3"> Intéressé, curieux </h3>
+    <p> <!-- reformule moi meme. -->
+      Je suis aisément intéressé par des nouveaux sujets. J'aime apprendre par moi même. 
+    </p>
+  </span>
+  <span class="right-50">
+    <h3 class="h3"> Stress résistant </h3> <!-- A refaire -->
+    <p> 
+      Je suis très peu impacté par le stress et endurant dans mes projets. 
+    </p>
+  </span>
+
+  <span class="full-width">
+    <h2 id="Experience" class ="h2">@:building_html() Expériences </h2>
+    <hr/>
+    @for (title, date, place) in &[
+    (
+    "Bénévolat réparation d'une grange.",
+    "1 semaine, été 2023",
+    "Bélesta, Ariège.",
+    ),
+    (
+    "Bénévolat dans une ferme agricole.",
+    "2 semaines, été 2018",
+    "Brousse, Puy de Dôme.",
+    ),
+    (
+    "Stage d'observation.",
+    "2017",
+    "Interforges, Issoire.",
+    ),
+    ] {
+    @:_formation_html(title, date, place)
+    }
+  </span>
+
+  <h2 id="Formation" class="h2 | full-width"> @:book_html() Formation </h2>
+  <hr/>
+  @for (title, date, place) in &[
+  (
+  "Master Image et Son, Année 1.",
+  "2022-2023",
+  "Université de Bordeaux, Talence.",
+  ),
+  (
+  "L3 Informatique.",
+  "2021-2022",
+  "Université de Bordeaux, Talence.",
+  ),
+  (
+  "L2 Informatique.",
+  "2020-2021",
+  "Université de Bordeaux, Talence.",
+  ),
+  (
+  "École d'ingénieur, Année 1, Filière MATMECA.",
+  "2019-2020",
+  "ENSEIRB-MATMECA, Talence",
+  ),
+  (
+  "CPGE, PTSI-PT / L2 en Mécanique.",
+  "2017-2019",
+  "Lycée Jean-Zay, Thiers.",
+  ),
+  (
+  "Bac S Sciences de l'ingénieur.",
+  "2017-2019",
+  "Lycée Lafayette, Clermont-Ferrand.",
+  ),
+  ] {
+    @:_formation_html(title, date, place)
+  }
+
+  <h2 class="h2 | full-width"> @:hourglass_html() Intérêts et Hobbies  </h2>
+  <hr/>
+  <span class="left-50">
+    <h3 class="h3"> Linux et l'Open Source </h3>
+    <p> J'utilise Linux sur mon ordinateur personnel depuis près de quatre ans. J'ai utilisé des distributions tel que Ubuntu, Archlinux et NixOs. Je préfère aussi utiliser des logiciels open source dans la mesure du possible. </p>
+    <h3 class="h3"> Sciences et recherche </h3>
+    <p> J'ai toujours été très attiré par les sciences et particulièrement l'informatique. Je regarde des conférences et lis des articles que ce soit sur l'informatique aussi bien théorique que pratique, les mathématiques ou la physique. </p>
+  </span>
+  <span class="right-50">
+    <h3 class="h3"> Sport </h3>
+    <p> Je pratique le skateboard depuis 10 ans. Ce sport, bien que individuel, porte des fortes valeurs d'entraide et solidarité, tout en demandant énormément de persévérance. J'ai pratiqué d'autres sports tel que le football, badminton, tennis, et la course d'orientation.</p>
+      <h3 class="h3 "> Musique </h3>
+      <p> Je joue de la basse ainsi que des percussions et de la guitare. J'ai joué dans un groupe de jazz et dans une harmonie d'une centaine de musiciens. J'ai aussi fait des stages de musique intensive pendant 4 étés. </p>
+  </span>
+  <span class="full-width">
+    <h3 class="h3"> Jeux Vidéos et Développement. </h3>
+    <p> Je joue aux jeux vidéos depuis mon enfance. Mes licences préférées comptent Borderlands, Celeste, Minecraft, League of Legends, CsGo, WarFork. C'est au Lycée que j'ai commencé a m'intéresser à l'aspect développement des jeux vidéos. J'ai exploré des moteurs tels que Unity, Heaps, Godot, et aujourd'hui Bevy. J'ai aussi exploré les API graphiques OpenGl et Vulkan.</p>
+  </span>
+</div>
+

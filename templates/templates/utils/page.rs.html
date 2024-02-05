@@ -1,5 +1,4 @@
 @use super::{doctype_html, page_header_html};
-@use crate::utils::icons::{list_html};
 @(title: &str, route: &str, global_styles: bool, page_styles: &str)
 
 @:doctype_html()
@@ -16,7 +15,7 @@
 
 
     <aside class="aside"
-        hx-get="/@(route)/nav?expended=false" 
+        hx-get="/@(route)/aside" 
         hx-trigger="load" 
         hx-swap="innerHtml"
     >

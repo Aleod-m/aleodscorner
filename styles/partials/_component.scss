@@ -1,3 +1,8 @@
+@use "../partials/variables" as *;
+@use "../partials/layout" as *;
+@use "../partials/shape" as *;
+@use 'sass:color';
+
 @mixin hover {
     &:not([diabled]):hover {
         @content
@@ -7,5 +12,40 @@
 @mixin tooltip {
     &:not([diabled]):hover > #tooltip {
         @content
+    }
+}
+
+@mixin loading_bar($color, $class) {
+    .bar-#{$class} {
+        @content;
+        @include f(true);
+        @include row;
+        justify-content: end;
+        align-items: center;
+        >.bg {
+            @include f(true);
+            @include row;
+            align-items: center;
+            @include pill(90%, .8em);
+            background-color: color.scale($color, $lightness: -90%);
+            border: 1px solid color.scale($color, $lightness: -70%);
+            padding-left: $s1;
+            padding-right: $s1;
+            >.lvl {
+                display: block;
+                @include pill(null, calc(100% - $s2));
+                background-color: $color;
+            }
+        }
+    }
+}
+
+@mixin loading_bar_color($class, $color) {
+    .bar-#{$class} >.bg {
+            background-color: color.scale($color, $lightness: -90%);
+            border: 1px solid color.scale($color, $lightness: -70%);
+            >.lvl {
+                background-color: $color;
+            }
     }
 }

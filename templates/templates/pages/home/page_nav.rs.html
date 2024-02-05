@@ -1,7 +1,10 @@
-@use crate::utils::expendable_nav_html;
-@(expended: bool)
+@use crate::utils::expandable_sidebar_html;
+@use crate::utils::icons::list_html;
 
-@:expendable_nav_html(expended, "/home/nav", {
+@(expanded: bool)
+
+@:expandable_sidebar_html(expanded, "/home/aside", {@:list_html()}, {
+<nav>
   @for (id, content) in &[
     ("#Intro", "Introduction"),
     ("#Recent", "Recent articles"),
@@ -9,4 +12,5 @@
   ] {
     <a href=@id> @content </a>
   }
+</nav>
 })

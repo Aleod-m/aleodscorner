@@ -1,5 +1,7 @@
 @use "../partials/variables" as *;
 @use "../partials/layout" as *;
+@use "../partials/component" as *;
+@use "sass:color";
 
 * {
     text-align: inherit;
@@ -8,8 +10,6 @@
 
 
 /* Text */
-.h3 {
-}
 .h1, .h2, .h3 { text-tranform: capitalize; }
 .h1 { font-size: 16pt; }
 .h2 {
@@ -19,19 +19,14 @@
 .h3 {
     font-size: 12pt; 
 }
-p, a { font-size: 10pt; }
 
+p, a { font-size: 10pt; }
 /* Icons */
 .bi { 
     fill: $fg;
     align-self: center;
     margin-right: .3em;
 }
-
-/* Doesn't work yet 
-*:has(> .bi) {
-    @include row;
-}*/
 
 // No footer on the cv.
 .footer { display: none; }
@@ -50,14 +45,17 @@ p, a { font-size: 10pt; }
   grid-template-columns: auto 1fr;
   margin-bottom: 2em;
 }
-
 #content {
+    @include f;
+    @include col;
+}
+.content {
     grid-column: 2 / 3;
     display: grid;
     gap: 0 .5em;
     padding: 0 10%;
     grid-template-columns: 
-        [content-start left-50-start left-30-start left-60-start]
+        [full-width-start left-50-start left-30-start left-60-start]
         2fr
         [left-30-end right-60-start middle-start]
         1fr
@@ -65,18 +63,24 @@ p, a { font-size: 10pt; }
         1fr
         [left-60-end right-30-start middle-end]
         2fr
-        [content-end right-50-end right-30-end right-60-end]
+        [full-width-end right-50-end right-30-end right-60-end]
         ;
 
     .h1 { grid-column: h1; }
     .h2 { grid-column: h2; }
     .h3 { grid-column: h2; }
+    a {
+        color: $green;
+        :visited {
+            color: color.scale($green, $lightness: -50%);
+        }
+    }
     > {
         * { 
-            grid-column: content; 
+            grid-column: full-width; 
         }
         .full-width {
-            grid-column: content;
+            grid-column: full-width;
         }
         .left-50 {
             grid-column: left-50;
@@ -113,27 +117,8 @@ p, a { font-size: 10pt; }
     margin-top: .3em;
     > { 
         .comp-desc { grid-column: 1/2; }
-        .comp-lvl {
-            @include f(true);
-            @include row;
+        @include loading_bar($cyan, "lvl") {
             grid-column: 2/3;
-            justify-content: end;
-            align-items: baseline;
-            gap: 2px;
-            > {
-                .lvl {
-                    box-sizing: border-box;
-                    width: 1em;
-                    height: 1em;
-                    background-color: $fg;
-                    border-radius: 100%;
-                }
-                .lvl.on {
-                    border: 3px solid $fg;
-                    background-color: change-color($green, $lightness: 40%);
-                    border-radius: 100%;
-                }
-            }
         }
     }
 }

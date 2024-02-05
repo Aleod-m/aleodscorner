@@ -1,4 +1,5 @@
-use serde_derive::{Serialize, Deserialize};
+use serde::{Serialize, Deserialize};
+
 
 #[derive(Serialize, Deserialize)]
 pub struct ArticleSummary {

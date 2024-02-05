@@ -32,9 +32,8 @@
     });
 
   staticFiles = pkgs.runCommandLocal "copy-static" { src = ../static; } ''
-    mkdir -p $out
-    find $src -not -name '*.css' \
-      -exec cp --parents \{\} $out/static \;
+    mkdir -p $out/static
+    cp -r $src/. $out/static
   '';
 
   styles =
@@ -42,7 +41,7 @@
       src = ../styles;
       nativeBuildInputs = [pkgs.dart-sass];
     } ''
-      mkdir -p $out
+      mkdir -p $out/static
       sass --no-source-map \
         $src/globals.scss:$out/static/globals.css \
         $src/pages:$out/static/pages
@@ -72,7 +71,7 @@
 in {
 
   packages = {
-    inherit dockerImage server;
+    inherit dockerImage server staticFiles styles;
     default = server;
   };
 

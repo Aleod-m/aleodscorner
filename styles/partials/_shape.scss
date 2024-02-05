@@ -1,3 +1,5 @@
+@use "../partials/layout" as *;
+
 @mixin sq($size, $rounding: 0) {
     width: $size;
     height: $size;
@@ -6,15 +8,20 @@
     }
 }
 
-@mixin pill($w, $h) {
-    width: $w;
-    height: $h;
-    border-radius: 100%; 
+@mixin pill($w: null, $h: null) {
+    @if $h {
+        height: $h;
+    }
+    @if $w {
+        width: $w;
+    }
+    border-radius: 999999px; 
 }
 
 @mixin circle($size) {
     @include sq($size, $rounding: 100%);
 }
+
 
 *:not(:hover) {
     .on-parent-hover {
