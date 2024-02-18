@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nix-filter.url = "github:numtide/nix-filter";
 
     crane = {
       url = "github:ipetkov/crane";
@@ -22,6 +23,7 @@
     crane,
     fenix,
     flake-utils,
+    nix-filter,
     ...
   }:
     flake-utils.lib.eachDefaultSystem (system: let
@@ -30,12 +32,12 @@
       };
 
       fenixPkgs = fenix.packages.${system};
-      craneLib = crane.lib.${system}.overrideToolchain fenixPkgs.stable.toolchain;
+      craneLib = (crane.mkLib pkgs).overrideToolchain fenixPkgs.stable.toolchain;
 
       # The port on wich the server operates
       port = 8080;
 
-      app = import ./nix/app.nix {inherit pkgs craneLib port;};
+      app = import ./nix/app.nix {inherit pkgs craneLib port nix-filter;};
     in {
       inherit (app) checks packages;
 

@@ -1,35 +1,36 @@
 @use crate::utils::icons::arrow_clockwise_html;
-@use super::projects_html;
+@use super::{projects_html, articles_html};
 @()
 
 <div id="Intro" class="row f-center">
-  <img class="avatar-intro" src="/static/imgs/aleod_logo.png"/>
+  <span class="avatar"></span>
 
-  <p style="margin-left: 5px"> 
-    <a href="/navigate?route=/cv"> Adrien </a>
-    a.k.a Aleod, I'm a french programmer living in Bordeaux, France. I'm in my 20's and currently searching for a job. </p> 
+  <p> Welcome to my little corner of the web. I'm Adrien, a.k.a. Aleod, I'm passionate about computers and whatever topics associated with it such as mathematics, physics, video games, Linux, programming languages, Open Source ... My favorite programming languages at the moment are Rust and Nix. I daily drive the NixOS distribution. I also like to play guitar and skateboard a fair share when I'm not hacking on something of course. <br/>
+I'm in currently searching for a job by the way, look at my <a href="/navigate?route=/cv" class="a">CV</a> if your interest is piqued.</p> 
 </div>
 
-<div class="section">
-<h2 id="articles" class="h2 | row"> 
+
+<div class="section f col g-2">
+  <h2 id="projects" class="fs-xl">
+    Projects I'm working on.
+  </h2>
+  @:projects_html()
+</div>
+
+<div class="section f col g-2">
+<h2 id="articles" class="fs-xl"> 
   Recent articles
-  <button class="btni | on-parent-hover" style="margin-left: 1em;">
+  <button class="btni ml-4 | on-parent-hover" style="margin-left: 1em;">
     @:arrow_clockwise_html()
   </button>
 </h2>
+@:articles_html()
 
-<div class=".col"
-  hx-get="/home/articles"
-  hx-trigger="every 10s, intersect"
-  hx-target="this"
-  hx-swap="innerHTML"
->
-</div>
-</div>
-
-<div class="section">
-<h2 id="projects" class="h2">
-  Projects I'm working on.
-</h2>
-@:projects_html()
+    <!--hx-trigger="every 10s, intersect"-->
+  <div class=".col"
+    hx-get="/home/articles"
+    hx-target="this"
+    hx-swap="innerHTML"
+  >
+  </div>
 </div>

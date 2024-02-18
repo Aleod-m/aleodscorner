@@ -1,4 +1,5 @@
 @use "../partials/variables" as *;
+@use "../partials/shape" as *;
 @use "../partials/layout" as *;
 @use "../partials/component" as *;
 @use "sass:color";
@@ -8,51 +9,45 @@
     font: Arial;
 }
 
-
 /* Text */
-.h1, .h2, .h3 { text-tranform: capitalize; }
-.h1 { font-size: 16pt; }
-.h2 {
-    font-size: 14pt; 
-    margin-top: .5em;
+.h1, .h2, .h3 {
+    text-tranform: capitalize; 
 }
-.h3 {
-    font-size: 12pt; 
-}
+.h1 { font-size: $fsxl; }
+.h2 { font-size: $fsl; margin-top: .5em; }
+.h3 { font-size: $fsm; font-weight: bold; }
 
-p, a { font-size: 10pt; }
+p, a:not(.btni) { font-size: $fsm; }
+
 /* Icons */
 .bi { 
-    fill: $fg;
+    @include sq($rs4);
     align-self: center;
-    margin-right: .3em;
+    margin-right: $rs1;
 }
 
 // No footer on the cv.
 .footer { display: none; }
-
-.header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    > * {
-        font-size: inherit;
-    }
-}
 
 .body {
   display: grid;
   grid-template-columns: auto 1fr;
   margin-bottom: 2em;
 }
-#content {
+
+#page-content {
+    grid-column: 2 / 3;
     @include f;
     @include col;
 }
-.content {
-    grid-column: 2 / 3;
+
+.print {
+    display: none;
+}
+
+.content > .no-print {
     display: grid;
-    gap: 0 .5em;
+    gap: 0 $s2;
     padding: 0 10%;
     grid-template-columns: 
         [full-width-start left-50-start left-30-start left-60-start]
@@ -66,9 +61,9 @@ p, a { font-size: 10pt; }
         [full-width-end right-50-end right-30-end right-60-end]
         ;
 
-    .h1 { grid-column: h1; }
-    .h2 { grid-column: h2; }
-    .h3 { grid-column: h2; }
+    .h2>.bi {color: $cyan;}
+    hr { color: $cyan; }
+    .h3 { color: $cyan; }
     a {
         color: $green;
         :visited {
@@ -114,26 +109,36 @@ p, a { font-size: 10pt; }
 .comp {
     display: grid;
     grid-template-columns: max-content 1fr;
-    margin-top: .3em;
+    align-items: center;
+    column-gap: $s4;
     > { 
         .comp-desc { grid-column: 1/2; }
-        @include loading_bar($cyan, "lvl") {
+        $grad: lg(to right, "red", "green");
+        @include loading_bar($grad, "lvl") {
             grid-column: 2/3;
+            background-color: $bg;
+            font-size: inherit;
+            border: 1px solid $cyan;
         }
     }
 }
 
 .sdp {
-    @include row();
     @include f(true);
+    @include row();
     align-items: baseline;
     width: 100%;
      > .date {
         margin-left: auto;
+        color: $purple;
     }
     > .place {
         margin-left: 1em;
+        color: $grey;
     }
 }
 
-@import "cv_print";
+@media print {
+    @page{ size: a4;}
+    @import "cv_print";
+}

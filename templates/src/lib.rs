@@ -2,6 +2,7 @@
 include!(concat!(env!("OUT_DIR"), "/templates.rs"));
 
 pub use templates::*;
+use serde::Deserialize;
 
 pub struct RenderTemplate<T: FnOnce(&mut Vec<u8>) -> std::io::Result<()>>(pub T);
 
@@ -34,4 +35,28 @@ macro_rules! render_template {
         use $crate::RenderTemplate;
         RenderTemplate(move |o| $crate::templates::$root$(::$sub)*(o, $($arg),*))
     }}
+}
+
+#[derive(Debug, Default, Clone, Copy)]
+pub enum Language {
+    #[default]
+    French,
+    English,
+}
+
+#[derive(Debug, Default, Clone, Copy)]
+pub enum Colors {
+    #[default]
+    Print,
+    Light,
+    Dark,
+}
+
+#[derive(Deserialize, Default)]
+pub struct Id(String);
+
+#[derive(Clone, Copy)]
+pub enum Version {
+    Normal,
+    Print,
 }

@@ -1,0 +1,31 @@
+@use crate::{
+  utils::icons::building_html,
+  Language,
+};
+@use super::_formation_html;
+
+@(lang: Language)
+@match lang {
+  Language::French => {
+    <h2 id="Experience" class ="h2">@:building_html() Expériences </h2>
+    <hr/>
+    @for (title, date, place) in &[
+    ( "Bénévolat réparation d'une grange.", "1 semaine, été 2023", "Bélesta, Ariège."),
+    ( "Bénévolat dans une ferme agricole.", "2 semaines, été 2018", "Brousse, Puy de Dôme."),
+    ( "Stage d'observation.", "2017", "Interforges, Issoire."),
+    ] {
+      @:_formation_html(title, date, place)
+    }
+  }
+  Language::English => {
+    <h2 id="Experience" class ="h2">@:building_html() Experiences </h2>
+    <hr/>
+    @for (title, date, place) in &[
+    ("Voluntary work, barn renavtion.", "1 week, summer 2023", "Bélesta, Ariège."),
+    ("Voluntary work in a farm.", "2 weeks, summer 2018", "Brousse, Puy de Dôme."),
+    ("Internship.", "2017", "Interforges, Issoire."),
+    ] {
+      @:_formation_html(title, date, place)
+    }
+  }
+}

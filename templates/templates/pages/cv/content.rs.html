@@ -1,18 +1,20 @@
+@use crate::{
+  Colors,
+  Language,
+};
 @use super::{
   _print_html,
   _normal_html,
 };
 
 @(
-  colors: bool, 
-  layout: &str,
+  lang: Language,
+  colors: Colors, 
   ty: &str
 )
-<button 
-  class="button | mb-4 no-print center" 
-  onclick="window.print();"> 
-  PDF
-</button>
 
-@:_normal_html()
-@:_print_html(ty, colors, layout)
+
+<div class="content">
+  @:_normal_html(ty, lang)
+  @:_print_html(ty, colors, lang)
+</div>

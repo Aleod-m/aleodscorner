@@ -1,0 +1,29 @@
+@use super::_competance_html;
+@use crate::{
+  Language,
+  utils::{
+    icons::code_slash_html,
+  },
+};
+
+@(lang: Language)
+@match lang {
+  Language::French => {
+    <h2 class="h2" id="Competances"> @:code_slash_html() Programmation </h2>
+  }
+  Language::English => {
+    <h2 class="h2" id="Competances"> @:code_slash_html() Programming</h2>
+  }
+}
+<hr/>
+@:_competance_html(&[
+  ("Rust", 90),
+  ("Nix", 80),
+  ("Nushell", 70),
+  ("HTML/css/js", 60),
+  ("C/C++", 60),
+  ("Bash", 50),
+  ("Python", 50),
+  ("Java", 40),
+  ("Ocaml", 30),
+])

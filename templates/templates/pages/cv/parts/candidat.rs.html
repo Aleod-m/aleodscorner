@@ -1,0 +1,43 @@
+@use crate::{
+  Language,
+  Version,
+  utils::{
+    components::ilink_html,
+    icons::{
+      person_html,
+      house_html,
+      telephone_html,
+      envelope_at_html,
+      github_html,
+      globe_html,
+    }
+  },
+};
+
+@(lang: Language, ver: Version)
+
+@match lang {
+  Language::French => {
+    <h2 class="h2" id="About"> @:person_html() Candidat</h2>
+    <hr/>
+    <p>Derobert-Mazure Adrien 24 ans</p>
+  }
+  Language::English => {
+    <h2 class="h2" id="About"> @:person_html() Candidate</h2>
+    <hr/>
+    <p>Derobert-Mazure Adrien 24 years old</p>
+  }
+}
+<p>@:house_html() 6B allée de la Terrefort 33170 Gradignan</p>
+@:ilink_html({@:telephone_html()}, "tel:+33617506114", { +33617506114 })
+@:ilink_html({@:envelope_at_html()}, "mailto:adriendml99@@protonmail.com", { adriendml99@@protonmail.com })
+@match ver {
+  Version::Normal => {
+    @:ilink_html({@:github_html()}, "https://www.github.com/Aleod-m", {github.com/Aleod-m})
+    @:ilink_html({@:globe_html()}, "https://www.AleodsCorner.com", {AleodsCorner.com})
+  }
+  Version::Print=> {
+    @:ilink_html({@:github_html()}, "https://www.github.com/Aleod-m", {https://www.github.com/Aleod-m})
+    @:ilink_html({@:globe_html()}, "https://www.AleodsCorner.com", {https://www.AleodsCorner.com})
+  }
+}

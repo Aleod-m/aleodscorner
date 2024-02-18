@@ -1,0 +1,9 @@
+@use crate::utils::components::bar_html;
+@(competances: &[(&str, u16)])
+
+<div class="comp | g mt-1">
+  @for (comp, lvl) in competances {
+    <p class="com-desc"> @comp </p>
+    @:bar_html("lvl", *lvl)
+  }
+</div>

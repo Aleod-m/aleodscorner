@@ -15,37 +15,50 @@
     }
 }
 
-@mixin loading_bar($color, $class) {
-    .bar-#{$class} {
-        @content;
-        @include f(true);
-        @include row;
-        justify-content: end;
-        align-items: center;
-        >.bg {
-            @include f(true);
-            @include row;
-            align-items: center;
-            @include pill(90%, .8em);
-            background-color: color.scale($color, $lightness: -90%);
-            border: 1px solid color.scale($color, $lightness: -70%);
-            padding-left: $s1;
-            padding-right: $s1;
-            >.lvl {
-                display: block;
-                @include pill(null, calc(100% - $s2));
-                background-color: $color;
-            }
-        }
+@mixin shadow_grad($dir, $start, $end) {
+    position: relative;
+    transform-style: preserve-3d;
+    &::before {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        transform: translate3d(5px, 5px, -1px);
+        background: #{lg($dir, $start, $end)};
+        filter: blur(5px);
     }
 }
 
-@mixin loading_bar_color($class, $color) {
-    .bar-#{$class} >.bg {
-            background-color: color.scale($color, $lightness: -90%);
-            border: 1px solid color.scale($color, $lightness: -70%);
-            >.lvl {
-                background-color: $color;
+@mixin loading_bar($color, $class) {
+    .bar-#{$class} {
+        @content;
+        @include pill(90%, .5em);
+        display: grid;
+        padding: $rs1;
+        position:relative;
+        >.lvl {
+            @include pill(null, 100%);
+            display: inline-block;
+            -webkit-mask:linear-gradient(#fff 0 0);
+            mask:linear-gradient(#fff 0 0);
+            &::before {
+                content: "";
+                position:absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                background-image: $color;
             }
+        }
+        
+    }
+}
+
+@mixin loading_bar_color($color, $class) {
+    .bar-#{$class} {
+        @content;
+        > .lvl::before {
+            background-image: $color;
+        }
     }
 }

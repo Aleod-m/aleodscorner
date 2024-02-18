@@ -1,0 +1,53 @@
+@use "../partials/variables" as *;
+@use "../partials/component" as *;
+@use "../partials/layout" as *;
+
+.h3 {
+    @include mt($s4);
+}
+
+.avatar { 
+    @include mr($s4);
+    @include shadow_grad(to top, "purple", "red");
+    float: left;
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    &::after{
+        content:"";
+        background-image: url(/static/imgs/aleod_logo.png) ;
+        background-size: contain;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.a {
+    color: $green;
+}
+
+.header {
+    @extend %f;
+    @include col;
+    align-items: stretch;
+    .ilink {
+        color: $bg;
+    }
+}
+
+#page-content {
+    @extend %f;
+    @include col;
+    @include ph(10%);
+    @include mt($s10);
+    row-gap: $s4;
+    width: 80%;
+    height: 100%;
+}
+
+#page {
+    @extend %g;
+}

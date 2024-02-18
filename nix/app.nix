@@ -1,12 +1,15 @@
 {
   pkgs,
+  nix-filter,
   craneLib,
   port,
 }: let
-  inherit (pkgs) lib;
+  l = pkgs.lib;
+  f = nix-filter.lib;
+
   src = let 
     templateFilter = path: _type: (__match ".*rs.html$" path) != null;
-  in lib.cleanSourceWith {
+  in l.cleanSourceWith {
       src = craneLib.path ../.;
       filter = path: type: 
         (templateFilter path type) 
@@ -31,25 +34,34 @@
       inherit cargoArtifacts;
     });
 
-  staticFiles = pkgs.runCommandLocal "copy-static" { src = ../static; } ''
+  # Todo add a css purification step.
+  staticFiles = pkgs.runCommandLocal "static_files" { 
+    src = nix-filter {
+      root = ../.;
+      include = [ 
+        "static"
+        "styles"
+      ];
+      exclude = [
+        # Exclude styles built for local dev.
+        (f.and 
+          (f.inDirectory "static")
+          (f.matchExt "css")
+        )
+      ];
+    };
+    nativeBuildInputs = [pkgs.dart-sass]; 
+  } ''
     mkdir -p $out/static
-    cp -r $src/. $out/static
+    cp -r $src/static $out/static
+    sass --no-source-map \
+      $src/styles/globals.scss:$out/static/globals.css \
+      $src/styles/pages:$out/static/pages
   '';
-
-  styles =
-    pkgs.runCommandLocal "compile-scss" {
-      src = ../styles;
-      nativeBuildInputs = [pkgs.dart-sass];
-    } ''
-      mkdir -p $out/static
-      sass --no-source-map \
-        $src/globals.scss:$out/static/globals.css \
-        $src/pages:$out/static/pages
-    '';
 
   server = pkgs.symlinkJoin {
     name = "server";
-    paths = [serverBin staticFiles styles];
+    paths = [serverBin staticFiles];
   };
 
   # The docker image to deploy to fly.
@@ -68,10 +80,10 @@
       };
     };
   };
-in {
 
+in {
   packages = {
-    inherit dockerImage server staticFiles styles;
+    inherit dockerImage server staticFiles;
     default = server;
   };
 

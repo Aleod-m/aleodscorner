@@ -1,31 +1,245 @@
 @use "sass:color";
+@use "sass:string";
 @use "partials/variables" as *;
 @use "partials/layout" as *;
 @use "partials/shape" as *;
-@use "partials/spacing" as *;
 @use "partials/component" as *;
 
-:root {
-    @each $clr, $val in $colors {
-        --clr-#{$clr}: #{$val};
-    }
-    @each $size, $val in $sizes {
-        --s-#{$size}: #{$val};
-    }
-}
-
-html {
-    scroll-behaviour: smooth;
-}
-
+// === Globals ===
 * {
     margin: 0;
     padding: 0;
-    color: $fg;
+    color: inherit;
+    font-size: inherit;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-/* Page layout. */
+// === Sizes ===
+@each $fs, $val in $font_sizes {
+    .fs-#{$fs} { font-size: $val }
+}
+
+:root {
+    @each $size, $val in $sizes {
+        --s-#{$size}: #{$val};
+    }
+    @each $fs, $val in $font_sizes {
+        --fs-#{$fs}: #{$val};
+    }
+}
+
+// === Colors and gradients ===
+@each $clr, $val in $colors {
+    .clr-#{$clr} { color: $val }
+    .bclr-#{$clr} { background-color: $val }
+
+}
+
+:root {
+    @each $clr, $val in $colors {
+        --c-#{$clr}: #{$val};
+    }
+
+    @each $clr1 in ["red", "purple", "cyan", "green", "yellow", "orange"] {
+        @each $clr2 in ["red", "purple", "cyan", "green", "yellow", "orange"] {
+            @if $clr1 != $clr2 {
+                $s: string.slice($clr1, 1, 1);
+                $e: string.slice($clr2, 1, 1);
+                --clg-#{$s}#{$e}: #{lg(to right, $clr1, $clr2)};
+            }
+        }
+    }
+
+    @each $clr1 in ["red", "purple", "cyan", "green", "yellow", "orange"] {
+        @each $clr2 in ["red", "purple", "cyan", "green", "yellow", "orange"] {
+            @if $clr1 != $clr2 {
+                $s: string.slice($clr1, 1, 1);
+                $e: string.slice($clr2, 1, 1);
+                --crg-#{$s}#{$e}: #{rg($clr1, $clr2)};
+            }
+        }
+    }
+}
+
+@each $clr1, $val in ["red", "purple", "cyan", "green", "yellow", "orange"] {
+    @each $clr2, $val in ["red", "purple", "cyan", "green", "yellow", "orange"] {
+        @if $clr1 != $clr2 {
+            $s: string.slice($clr1, 1, 1);
+            $e: string.slice($clr2, 1, 1);
+        }
+    }
+}
+// === Layouts ===
+// margins and paddings
+@each $name, $val in $sizes {
+    $size: #{$val}rem;
+    .m-#{$name} { margin: $size; }
+    .mv-#{$name} { margin: $size 0; }
+    .mh-#{$name} { margin: 0 $size; }
+    .mt-#{$name} { margin-top: $size; }
+    .mb-#{$name} { margin-bottom: $size; }
+    .mr-#{$name} { margin-right: $size; }
+    .ml-#{$name} { margin-left: $size; }
+    .p-#{$name} { padding: $size; }
+    .pv-#{$name} { padding: $size 0; }
+    .ph-#{$name} { padding: 0 $size; }
+    .pt-#{$name} { padding-top: $size; }
+    .pb-#{$name} { padding-bottom: $size; }
+    .pr-#{$name} { padding-right: $size; }
+    .pl-#{$name} { padding-left: $size; }
+
+    $size: #{$val}em;
+    $name: r#{$name};
+    .m-#{$name} { margin: $size; }
+    .mv-#{$name} { margin: $size 0; }
+    .mh-#{$name} { margin: 0 $size; }
+    .mt-#{$name} { margin-top: $size; }
+    .mb-#{$name} { margin-bottom: $size; }
+    .mr-#{$name} { margin-right: $size; }
+    .ml-#{$name} { margin-left: $size; }
+    .p-#{$name} { padding: $size; }
+    .pv-#{$name} { padding: $size 0; }
+    .ph-#{$name} { padding: 0 $size; }
+    .pt-#{$name} { padding-top: $size; }
+    .pb-#{$name} { padding-bottom: $size; }
+    .pr-#{$name} { padding-right: $size; }
+    .pl-#{$name} { padding-left: $size; }
+}
+
+.if { @include f(true); }
+.f { @include f(); }
+
+.g {
+    display: grid;
+    &.c { place-content: center; }
+    // Gaps in grid. 
+    @each $name, $val in $sizes {
+        $size: #{$val}rem;
+        &.g-#{$name} { gap: $size; }
+        &.rg-#{$name} { row-gap: $size; }
+        &.cg-#{$name} { column-gap: $size; }
+        $size: #{$val}em;
+        $name: r#{$name};
+        &.g-#{$name} { gap: $size; }
+        &.rg-#{$name} { row-gap: $size; }
+        &.cg-#{$name} { column-gap: $size; }
+    }
+}
+// 2 or 3 columns layout.
+.g_3_cols {
+    @extend .g;
+    grid-template-columns: 
+        [content-start left-50-start left-30-start left-60-start]
+        2fr
+        [left-30-end right-60-start middle-start]
+        1fr
+        [left-50-end right-50-start]
+        1fr
+        [left-60-end right-30-start middle-end]
+        2fr
+        [content-end right-50-end right-30-end right-60-end]
+        ;
+    > {
+        * { 
+            grid-column: content; 
+        }
+        @each $name in [right, left] {
+            @each $nb in [30, 50, 60] {
+                .#{$name}-#{$nb} {
+                    grid-column: #{$name}-#{$nb};
+                }
+            }
+        }
+        .middle {
+            grid-column: middle;
+        }
+    }
+}
+
+// === Components ===
+// Reaveal on parent hover.
+*:not(:hover) {
+    .on-parent-hover {
+        display: none;
+    }
+}
+
+// Button with icon.
+.btni {
+    @extend %if;
+    @include row;
+    align-items: center;
+    background-color: transparent;
+    text-decoration: none;
+    border-style: none;
+    border-radius: 5px;
+    height: min-content;
+    width: min-content;
+    padding: $s2;
+    margin: $s1;
+    > .bi {
+        @include sq($rs6);
+        display: inline;
+        color: inherit;
+    }
+    &.btnt>.bi {
+        margin-right: $rs2;
+    }
+    @include hover {
+        background-color: fade-out($fg, .9);
+    }
+}
+
+.ico-link {
+    color: $green;
+    text-decoration: none;
+    > .bi {
+        @include sq($rs4);
+        display: inline;
+        color: inherit;
+    }
+}
+.ilink {
+    @extend %if;
+    @include row;
+    align-items: center;
+    color: $green;
+    > .bi {
+        @include sq($rs4);
+        display: inline;
+        color: inherit;
+        margin-right: $s1;
+    }
+    
+}
+
+.button {
+    background-color: transparent;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 3px solid $fg;
+    padding: .5em 1em;
+    width: max-content;
+    height: max-content;
+    background-color: fade-out($fg, .8);
+    @include hover {
+        background-color: fade-out($fg, .4);
+        color: $bg;
+    }
+}
+
+.section {
+    @include mv($s4);
+}
+
+
+// === Page Layout ===
+html {
+    scroll-behaviour: smooth;
+    color: $fg;
+    font-size: $fsm;
+}
+
 .body {
     display: grid;
     height: 100vh;
@@ -40,28 +254,11 @@ html {
 .header {
     grid-column: 1/3;
     grid-row: 1/2;
-    background-color: fade-out($purple, .4);
     width: 100%;
-    padding: .5em 0;
-    justify-self: center;
-    font-size: 18pt;
-    margin-bottom: 2em;
 }
 
 .aside {
     grid-column: 1/2;
-    display: flex;
-    flex-direction: column;
-    > nav { 
-        width: min-content;
-        height: min-content;
-        background-color: fade-out($red, .6);
-        border-radius: 0 5px 5px 0;
-        @include col;
-        padding: .5em;
-        position: sticky;
-        top: 1em;
-    }
 }
 
 #content {
@@ -71,54 +268,16 @@ html {
 
 .footer {
     grid-row: 3/4;
-    display: grid;
-    background-color: fade-out($cyan, .6);
-    padding-bottom: auto;
 }
 
-
-/* Button with icon */
-.btni {
-    @include f;
-    @include row;
-    align-items: center;
-    background-color: transparent;
-    text-decoration: none;
-    border-style: none;
-    border-radius: 5px;
-    height: min-content;
-    width: min-content;
-    padding: .5em;
-    margin: .2em;
-    > .bi {
-        @include sq(1.5em);
-        display: inline;
-        color: $fg;
+.card {
+    @include p($s4);
+    box-shadow: 0 0 $s1 $grey;
+    > .h3 {
+        & :has(.ico-link) {
+            @include pl($s4);
+        }
+        @include m(0);
     }
-    @include hover {
-        background-color: fade-out($fg, .9);
-    }
-}
-
-.btni.btnt>.bi {
-    margin-right: .5em;
-}
-
-.button {
-    background-color: transparent;
-    text-decoration: none;
-    border-radius: 5px;
-    border: 3px solid $fg;
-    padding: .5em 1em;
-    width: max-content;
-    height: max-content;
-    background-color: fade-out($fg, .8);
-    &:hover, &:focus {
-        background-color: fade-out($fg, .4);
-        color: $bg;
-    }
-}
-
-.section {
-    @include mv($s4);
+    border-radius: $s4;
 }

@@ -1,10 +1,11 @@
-@use crate::utils::icons::{house_html};
+@use crate::utils::{
+  icons::house_html,
+  components::nav_link_html,
+};
 @()
 
-<a
-  class="btni btnt" 
-  href="/home"
-> 
-  @:house_html()
-  Home
-</a>
+<nav class="g c | fs-xxl bclr-purple">
+  @:nav_link_html("home", {
+    @:house_html() Home
+  })
+</nav>

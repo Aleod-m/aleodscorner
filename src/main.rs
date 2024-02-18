@@ -4,7 +4,6 @@ use std::{env, net};
 use tower_http::services::ServeDir;
 use tower_livereload::LiveReloadLayer;
 
-mod hx;
 mod pages;
 
 pub mod prelude {
@@ -49,7 +48,6 @@ async fn main() -> Result<(), std::io::Error> {
 
     let router = Router::new()
         .apply(pages::add_pages)
-        .apply(hx::add_routes)
         //.apply(data::setup_routing)
         .nest_service("/static", ServeDir::new("static"))
         .layer(LiveReloadLayer::new().request_predicate(not_htmx_request));

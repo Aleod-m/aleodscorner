@@ -3,138 +3,116 @@
 @use "../partials/shape" as *;
 @use "../partials/component" as *;
 
-.print {
+/* print only */
+.header, .aside, .footer, #cv-settings {
+    display: none; 
+}
+.no-print, .content>.no-print {
     display: none;
 }
+.print { display: block; }
 
-@media print {
-    @page{ size: a4;}
-    /* print only */
-    .header, .aside, .footer {
-        display: none; 
-    }
-    .no-print, .content.no-print {
-        display: none;
-    }
-    .print {
-        display: block;
-    }
+/* Text */
+.h1 { font-size: 14pt; }
+.h2 { font-size: 12pt; }
+p, a, .h3, .ilink>a, .ilink { font-size: 12pt; }
+a { text-decoration: none; }
+.h3 { font-weight: bold; }
 
-    /* Icons */
-    .bi {
-        fill: $bg;
-        margin: .3em;
-    }
+hr {
+    height: 2px;
+    border: none;
+}
 
-    /* Text */
+/* Layout */
+.body {
+    background-image: none;
+    background-color: white;
+    place-content: center;
+}
+
+.content > .print {
+    display: grid;
+    gap: 0 $s2;
+    padding: 0 10%;
+    grid-template-columns: 
+    [full-width-start left-50-start left-30-start left-60-start]
+    2fr
+    [left-30-end right-60-start middle-start]
+    1fr
+    [left-50-end right-50-start]
+    1fr
+    [left-60-end right-30-start middle-end]
+    2fr
+    [full-width-end right-50-end right-30-end right-60-end]
+    ;
+    > {
+        *, .full-width {
+            grid-column: full-width;
+        }
+        .left-50 {
+            grid-column: left-50;
+        }
+        .right-50 {
+            grid-column: right-50;
+        }
+        .right-30 {
+            grid-column: right-30;
+        }
+        .right-60 {
+            grid-column: right-60;
+        }
+        .left-30 {
+            grid-column: left-30;
+        }
+        .left-60 {
+            grid-column: left-60;
+        }
+        .middle {
+            grid-column: middle;
+        }
+        .center {
+            justify-self: center;
+        }
+    }
+}
+
+.comp {
+    font-size: 10pt;
+}
+
+.content>.print:not(.colors) {
     p, a, h1, h2, h3 {
-        @include f(true);
-        @include row;
-        color: $bg;
-        margin: 0;
-    }
-    p, a, h3 { font-size: 10pt; }
-    h1 { font-size: 14pt; }
-    h2 { font-size: 12pt; }
-    h3 { font-weight: bold; }
-    a { text-decoration: none; }
-
-    hr {
-        height: 2px;
-        background-color: $bg;
-        border: none;
-    }
-
-    /* Layout */
-    .body {
-        display: grid;
-        background-image: none;
-        background-color: white;
-        place-content: center;
-    }
-
-    .content {
         color: black;
-        display: grid;
-        gap: 0 .5em;
-        grid-template-columns: 
-            [full-width-start left-50-start left-30-start left-60-start]
-            2fr
-            [left-30-end right-60-start middle-start]
-            1fr
-            [left-50-end right-50-start]
-            1fr
-            [left-60-end right-30-start middle-end]
-            2fr
-            [full-width-end right-50-end right-30-end right-60-end]
-           ;
-        > {
-            *, .full-width {
-                grid-column: full-width;
-            }
-            .left-50 {
-                @include f;
-                @include col;
-                grid-column: left-50;
-            }
-            .right-50 {
-                @include f;
-                @include col;
-                grid-column: right-50;
-            }
-            .right-30 {
-                grid-column: right-30;
-            }
-            .right-60 {
-                grid-column: right-60;
-            }
-            .left-30 {
-                grid-column: left-30;
-            }
-            .left-60 {
-                grid-column: left-60;
-            }
-            .middle {
-                grid-column: middle;
-            }
-            .center {
-                justify-self: center;
-            }
+    }
+    hr {
+        background-color: black;
+    }
+    .bi {
+        color: black;
+    }
+    .sdp {
+        > .place {
+            color: black;
         }
-        a {
-            color: $bg;
-
+        > .date {
+            color: black;
         }
     }
-
     .comp {
-        display: grid;
-        grid-template-columns: max-content 1fr;
-        margin-top: .1em;
-        > {
-            .comp-desc {
-                grid-column: 1/2;
-            }
-            @include loading_bar($fg, "lvl") {
-                grid-column: 2/3;
-            }
-        }
+        font-size: 10pt;
+        > {@include loading_bar(linear-gradient($fg 0%, $fg 100%), "lvl") {
+            border: none;
+            background-color: black;
+        }}
     }
-
-    .content.colors {
-        height: 100%;
-        p, a, h1, h2, h3 {
-            color: $fg;
-        }
-        hr {
-            background-color: $fg;
-        }
-        .bi {
-            fill: $fg;
-        }
-        .comp > {
-            @include loading_bar_color("lvl", $cyan);
-        }
+}
+.content>.print.colors {
+    .h2>.bi {color: $cyan;}
+    .h3 { color: $cyan; }
+    hr { background-color: $cyan; }
+    .ilink {
+        color: $fg;
     }
-
+    height: 100%;
 }

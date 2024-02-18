@@ -1,21 +1,20 @@
-@use super::icons::x_lg_html;
-@(expended: bool, route: &str, icon: Content, content: Content)
+@use crate::utils::icons::x_lg_html;
+@(icon: Content, expended: bool, route: &str, target: &str)
 
 @if expended {
   <button class="btni"
     hx-get="@(route)?expanded=false" 
-    hx-target="closest aside" 
+    hx-target=@target
     hx-swap="innerHTML"
   >
     @:x_lg_html() 
   </button>
-  @:content()
 } else {
   <button class="btni" 
     hx-get="@(route)?expanded=true" 
-    hx-target="closest aside" 
+    hx-target=@target
     hx-swap="innerHTML"
   >
-  @:icon()
+    @:icon()
   </button>
 }

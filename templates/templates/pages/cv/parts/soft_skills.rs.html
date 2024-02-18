@@ -1,0 +1,37 @@
+@use crate::{
+  utils::icons::lightbulb_html,
+  Language,
+};
+@(lang: Language)
+<h2 id="SoftSkills" class="h2 | full-width"> @:lightbulb_html() Soft Skills </h2>
+<hr class="full-width"/>
+@match lang {
+  Language::French => {
+    <span class="left-50">
+      <h3 class="h3"> Intéressé, curieux </h3>
+      <p> <!-- reformule moi meme. -->
+        Je suis aisément intéressé par des nouveaux sujets. J'aime apprendre par moi même. 
+      </p>
+    </span>
+    <span class="right-50">
+      <h3 class="h3"> Stress résistant </h3> <!-- A refaire -->
+      <p> 
+        Je suis très peu impacté par le stress et endurant dans mes projets. 
+      </p>
+    </span>
+  }
+  Language::English => {
+    <span class="left-50">
+      <h3 class="h3"> Interested, curious</h3>
+      <p> <!-- reformule moi meme. -->
+        I'm easily intrested in new and fresh subjects. I like to learn by myself.
+      </p>
+    </span>
+    <span class="right-50">
+      <h3 class="h3"> Stress resilient </h3> <!-- A refaire -->
+      <p> 
+        Stress does not impact me. I'm endurant in my endeavours.
+      </p>
+    </span>
+  }
+}

@@ -1,5 +1,22 @@
 @use "../partials/variables" as * ;
 
+
+@mixin m($size) { margin: $size; }
+@mixin mv($size) { margin: $size 0; }
+@mixin mh($size) { margin: 0 $size; }
+@mixin mt($size) { margin-top: $size; }
+@mixin mb($size) { margin-bottom: $size; }
+@mixin mr($size) { margin-right: $size; }
+@mixin ml($size) { margin-left: $size; }
+
+@mixin p($size) { padding: $size; }
+@mixin pv($size) { padding: $size 0; }
+@mixin ph($size) { padding: 0 $size; }
+@mixin pt($size) { padding-top: $size; }
+@mixin pb($size) { padding-bottom: $size; }
+@mixin pr($size) { padding-right: $size; }
+@mixin pl($size) { padding-left: $size; }
+
 @mixin row() {
     flex-direction: row; 
 }
@@ -10,68 +27,52 @@
 
 @mixin f($inline: false) {
     @if $inline {
-     display: inline-flex;
+      display: inline-flex;
     } @else {
       display: flex;
     }
 
     &.row { @include row(); }
     &.col { @include col(); }
-
-    &.center {
-        justify-content: center;
-        align-items: center;
+    &.is { align-items: stretch; }
+    &.ic { align-items: center; }
+    &.c { justify-content: center; }
+    &.sa { justify-content: space-around; }
+    &.w { flex-wrap: wrap; }
+    @each $name, $val in $sizes {
+        $size: #{$val}rem;
+        &.g-#{$name} { gap: $size; }
+        &.rg-#{$name} { row-gap: $size; }
+        &.cg-#{$name} { column-gap: $size; }
+        $size: #{$val}em;
+        $name: r#{$name};
+        &.g-#{$name} { gap: $size; }
+        &.rg-#{$name} { row-gap: $size; }
+        &.cg-#{$name} { column-gap: $size; }
     }
-    >.center {
-        justify-self: center;
-        align-self: center;
-    }
-}
 
-.if { @include f(true); }
-.f { @include f(); }
-
-/* Grid Layout solutions. */
-@mixin g() {
-    display: grid;
-    &.center { place-content: center; }
-    /* Gaps in grid */
-    @each $name, $size in $sizes {
-        &.gap-#{$name} { gap: $size; }
-        &.rgap-#{$name} { row-gap: $size; }
-        &.cgap-#{$name} { column-gap: $size; }
-    }
-}
-
-.g { @include g(); }
-
-/* A helper class to layout with two or three columns. */
-.g_cols {
-    @include g();
-    grid-template-columns: 
-        [content-start left-50-start left-30-start left-60-start]
-        2fr
-        [left-30-end right-60-start middle-start]
-        1fr
-        [left-50-end right-50-start]
-        1fr
-        [left-60-end right-30-start middle-end]
-        2fr
-        [content-end right-50-end right-30-end right-60-end]
-        ;
     > {
-        * { 
-            grid-column: content; 
+        .stretch {
+            align-self: stretch;
         }
-        @each $name in [right, left] {
-            @each $nb in [30, 50, 60] {
-                .#{$name}-#{$nb} {
-                    grid-column: #{$name}-#{$nb};
-                }
-            }
+        .center {
+            justify-self: center;
+            align-self: center;
         }
-        .middle {
-            grid-column: middle;
+        .jssa {
+            justify-self: space-around;
         }
     }
+}
+
+%f {
+    display: flex;
+}
+
+%if {
+    display: inline-flex;
+}
+
+%g {
+    display: grid;
 }

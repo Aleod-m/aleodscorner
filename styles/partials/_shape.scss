@@ -22,9 +22,5 @@
     @include sq($size, $rounding: 100%);
 }
 
-
-*:not(:hover) {
-    .on-parent-hover {
-        display: none;
-    }
+@mixin hover_p($parent) {
 }

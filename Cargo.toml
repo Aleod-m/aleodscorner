@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [workspace]
-members = [ "./templates", "./data" ]
+members = [ "./templates" ]
 exclude = []
 
 
@@ -19,11 +19,9 @@ features = ["derive"]
 [dependencies]
 axum.workspace = true
 serde.workspace = true
-templates.path = "./templates"
-data.path  = "./data" 
+templates = { path = "./templates" }
 axum-htmx = "0.5.0"
 axum-macros = "0.4"
-cached = "0.46"
 hyper = "1.0"
 tower = "0.4.13"
 tower-livereload = "0.9"
