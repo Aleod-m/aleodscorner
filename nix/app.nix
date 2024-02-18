@@ -39,8 +39,8 @@
     src = nix-filter {
       root = ../.;
       include = [ 
-        "static"
-        "styles"
+        (f.inDirectory "static")
+        (f.inDirectory "styles")
       ];
       exclude = [
         # Exclude styles built for local dev.
@@ -53,7 +53,7 @@
     nativeBuildInputs = [pkgs.dart-sass]; 
   } ''
     mkdir -p $out/static/pages
-    cp -r $src/static $out/static
+    cp -r $src/static/. $out/static/.
     sass --no-source-map \
       $src/styles/globals.scss:$out/static/globals.css \
       $src/styles/pages:$out/static/pages
