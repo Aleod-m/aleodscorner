@@ -52,13 +52,14 @@
     };
     nativeBuildInputs = [pkgs.dart-sass]; 
   } ''
-    mkdir -p $out/static
+    mkdir -p $out/static/pages
     cp -r $src/static $out/static
     sass --no-source-map \
       $src/styles/globals.scss:$out/static/globals.css \
       $src/styles/pages:$out/static/pages
   '';
 
+  # The server with all the static files.
   server = pkgs.symlinkJoin {
     name = "server";
     paths = [serverBin staticFiles];
@@ -70,7 +71,7 @@
     tag = "latest";
     copyToRoot = pkgs.buildEnv {
       name = "image-root";
-      paths = [server pkgs.coreutils];
+      paths = [server pkgs.coreutils pkgs.unixtools.procps];
     };
     config = {
       Cmd = ["${server}/bin/server"];
