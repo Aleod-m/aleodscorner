@@ -1,0 +1,43 @@
+@use crate::{
+  Colors,
+  Language,
+  utils::components::expandable_html,
+  utils::icons::gear_html,
+  utils::page_header_html,
+  utils::doctype_html,
+};
+@use super::{
+  _print_html,
+  _normal_html,
+};
+
+@(
+  lang: Language,
+  colors: Colors, 
+  ty: &str
+)
+
+@:doctype_html()
+<html>
+  @:page_header_html("Dev cv page.", "/cv/dev", true, None, "cv.css")
+  <body class="body">
+    <div id="page-content">
+      <div class="f row ic | center no-print">
+        @:expandable_html({@:gear_html()}, false, "/cv/dev/settings", "#cv-settings") 
+        <button 
+          class="button | m-4 center" 
+          onclick="window.print();"
+        > 
+          PDF
+        </button>
+      </div>
+
+      <div id="cv-settings" class="center"> </div>
+
+      <div class="content">
+        @:_normal_html(ty, lang)
+        @:_print_html(ty, colors, lang)
+      </div>
+    </div>
+  </body>
+</html>

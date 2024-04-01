@@ -49,8 +49,10 @@ async fn main() -> Result<(), std::io::Error> {
     let router = Router::new()
         .apply(pages::add_pages)
         //.apply(data::setup_routing)
-        .nest_service("/static", ServeDir::new("static"))
-        .layer(LiveReloadLayer::new().request_predicate(not_htmx_request));
+        .nest_service("/static", ServeDir::new("static"));
+
+    #[cfg(debug_assertions)]
+    let router = router.layer(LiveReloadLayer::new().request_predicate(not_htmx_request));
 
     axum::serve(tcp_listener, router).await
 }

@@ -30,14 +30,14 @@
 }
 <p>@:house_html() 6B allée de la Terrefort 33170 Gradignan</p>
 @:ilink_html({@:telephone_html()}, "tel:+33617506114", { +33617506114 })
-@:ilink_html({@:envelope_at_html()}, "mailto:adriendml99@@protonmail.com", { adriendml99@@protonmail.com })
+@:ilink_html({@:envelope_at_html()}, "mailto:adriendml99@protonmail.com", { adriendml99@@protonmail.com })
 @match ver {
   Version::Normal => {
     @:ilink_html({@:github_html()}, "https://www.github.com/Aleod-m", {github.com/Aleod-m})
     @:ilink_html({@:globe_html()}, "https://www.AleodsCorner.com", {AleodsCorner.com})
   }
   Version::Print=> {
-    @:ilink_html({@:github_html()}, "https://www.github.com/Aleod-m", {https://www.github.com/Aleod-m})
-    @:ilink_html({@:globe_html()}, "https://www.AleodsCorner.com", {https://www.AleodsCorner.com})
+    @:ilink_html({@:github_html()}, "https://www.github.com/Aleod-m", {www.github.com/Aleod-m})
+    @:ilink_html({@:globe_html()}, "https://www.AleodsCorner.com", {www.AleodsCorner.com})
   }
 }

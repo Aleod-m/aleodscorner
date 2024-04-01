@@ -3,18 +3,40 @@
   Language,
 };
 @use super::{
-  _print_html,
   _normal_html,
 };
 
-@(
-  lang: Language,
-  colors: Colors, 
-  ty: &str
-)
+@(lang: Language)
 
+<h1 class="center mt-4" > Pdfs </h1>
+<div id="language" class="f row g-4 | center mv-4">
+  @match lang {
+    Language::French => {
+      <a href="/static/cvs/cv_colors_fr.pdf" class="button"> Colors </a>
+      <a href="/static/cvs/cv_print_fr.pdf" class="button"> Printable </a>
+    }
+    Language::English=> {
+      <a href="/static/cvs/cv_colors_en.pdf" class="button"> Colors </a>
+      <a href="/static/cvs/cv_print_en.pdf" class="button"> Printable </a>
+    }
+  }
+</div>
+
+<div id="language" class="f row g-4 | center">
+  @match lang {
+    Language::French => {
+      Francais
+      <div id="toggle" class="toggle off" hx-get="/cv/content/english" hx-traget="#page-content"></div>
+      Anglais
+    }
+    Language::English=> {
+      French
+      <div id="toggle" class="toggle on" hx-get="/cv/content/french" hx-traget="#page-content"></div>
+      English
+    }
+  }
+</div>
 
 <div class="content">
-  @:_normal_html(ty, lang)
-  @:_print_html(ty, colors, lang)
+  @:_normal_html("general", lang)
 </div>

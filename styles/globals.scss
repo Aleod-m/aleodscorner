@@ -32,7 +32,7 @@
 @each $clr, $val in $colors {
     .clr-#{$clr} { color: $val }
     .bclr-#{$clr} { background-color: $val }
-
+    .bocolor-#{$clr} { border-color: $val }
 }
 
 :root {
@@ -71,40 +71,42 @@
 }
 // === Layouts ===
 // margins and paddings
-@each $name, $val in $sizes {
-    $size: #{$val}rem;
-    .m-#{$name} { margin: $size; }
-    .mv-#{$name} { margin: $size 0; }
-    .mh-#{$name} { margin: 0 $size; }
-    .mt-#{$name} { margin-top: $size; }
-    .mb-#{$name} { margin-bottom: $size; }
-    .mr-#{$name} { margin-right: $size; }
-    .ml-#{$name} { margin-left: $size; }
-    .p-#{$name} { padding: $size; }
-    .pv-#{$name} { padding: $size 0; }
-    .ph-#{$name} { padding: 0 $size; }
-    .pt-#{$name} { padding-top: $size; }
-    .pb-#{$name} { padding-bottom: $size; }
-    .pr-#{$name} { padding-right: $size; }
-    .pl-#{$name} { padding-left: $size; }
-
-    $size: #{$val}em;
-    $name: r#{$name};
-    .m-#{$name} { margin: $size; }
-    .mv-#{$name} { margin: $size 0; }
-    .mh-#{$name} { margin: 0 $size; }
-    .mt-#{$name} { margin-top: $size; }
-    .mb-#{$name} { margin-bottom: $size; }
-    .mr-#{$name} { margin-right: $size; }
-    .ml-#{$name} { margin-left: $size; }
-    .p-#{$name} { padding: $size; }
-    .pv-#{$name} { padding: $size 0; }
-    .ph-#{$name} { padding: 0 $size; }
-    .pt-#{$name} { padding-top: $size; }
-    .pb-#{$name} { padding-bottom: $size; }
-    .pr-#{$name} { padding-right: $size; }
-    .pl-#{$name} { padding-left: $size; }
+@each $s_name, $val in $sizes {
+    @each $name, $size in [
+        ($s_name, #{$val}rem),
+        (r#{$s_name}, #{$val}em)
+    ] {
+        .w-#{$name} { width: $size;}
+        .h-#{$name} { height: $size;}
+        .m-#{$name} { margin: $size; }
+        .mv-#{$name} { margin: $size 0; }
+        .mh-#{$name} { margin: 0 $size; }
+        .mt-#{$name} { margin-top: $size; }
+        .mb-#{$name} { margin-bottom: $size; }
+        .mr-#{$name} { margin-right: $size; }
+        .ml-#{$name} { margin-left: $size; }
+        .p-#{$name} { padding: $size; }
+        .pv-#{$name} { padding: $size 0; }
+        .ph-#{$name} { padding: 0 $size; }
+        .pt-#{$name} { padding-top: $size; }
+        .pb-#{$name} { padding-bottom: $size; }
+        .pr-#{$name} { padding-right: $size; }
+        .pl-#{$name} { padding-left: $size; }
+        .bw-#{$name} {
+            border-size: $size; 
+            border-style: solid;
+        }
+        .br-#{$name} {
+            border-radius: $size;
+            border-style: solid;
+        }
+    }
 }
+.w-full {width: 100%;}
+.h-full {height: 100%;}
+.wh-full {width: 100%; height: 100%;}
+.w-half {width: 50%;}
+.h-half {height: 50%;}
 
 .if { @include f(true); }
 .f { @include f(); }
@@ -199,6 +201,7 @@
         color: inherit;
     }
 }
+
 .ilink {
     @extend %if;
     @include row;
@@ -214,7 +217,6 @@
 }
 
 .button {
-    background-color: transparent;
     text-decoration: none;
     border-radius: 5px;
     border: 3px solid $fg;
@@ -232,6 +234,38 @@
     @include mv($s4);
 }
 
+.toggle {
+    @include pill($rs7, $rs3);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 3px solid $fg;
+    background-color: fade-out($fg, .8);
+    padding: $s1;
+    &.off {
+        justify-content: start;
+    }
+    &.on {
+        justify-content: end;
+    }
+    &::after {
+        content: "";
+        @include circle($rs3);
+        background-color: $fg;
+    }
+}
+
+.card {
+    @include p($s4);
+    box-shadow: 0 0 $s1 $grey;
+    > .h3 {
+        & :has(.ico-link) {
+            @include pl($s4);
+        }
+        @include m(0);
+    }
+    border-radius: $s4;
+}
 
 // === Page Layout ===
 html {
@@ -270,14 +304,3 @@ html {
     grid-row: 3/4;
 }
 
-.card {
-    @include p($s4);
-    box-shadow: 0 0 $s1 $grey;
-    > .h3 {
-        & :has(.ico-link) {
-            @include pl($s4);
-        }
-        @include m(0);
-    }
-    border-radius: $s4;
-}

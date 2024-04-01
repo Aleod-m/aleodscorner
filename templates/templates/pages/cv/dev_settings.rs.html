@@ -5,8 +5,8 @@
 <form 
   class="f col p-2"
   hx-boost="true"
-  hx-put="/cv/content" 
-  hx-target=".content"
+  hx-put="/cv/dev" 
+  hx-target="#page-content"
   hx-swap="outerHTML"
 >
   <div class="f row p-2">
@@ -70,7 +70,7 @@
     </button>
     <button 
       class="button | m-4 center" 
-      hx-get="/cv/settings" 
+      hx-get="/cv/dev/settings" 
       hx-target="closest #cv-settings"
       hx-swap="innerHtml"
     >

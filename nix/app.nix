@@ -41,6 +41,7 @@
       include = [ 
         (f.inDirectory "static")
         (f.inDirectory "styles")
+        (f.inDirectory "cvs")
       ];
       exclude = [
         # Exclude styles built for local dev.
