@@ -1,3 +1,4 @@
 /target
 result*
 /static/**/*.css
+.sass-cache

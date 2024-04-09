@@ -7,6 +7,10 @@
 .header, .aside, .footer, #cv-settings {
     display: none; 
 }
+#page-content {
+    width: 100%;
+    padding: 0;
+}
 .no-print, .content>.no-print {
     display: none;
 }
@@ -79,6 +83,15 @@ hr {
 
 .comp {
     font-size: 10pt;
+}
+
+.sdp {
+    > .place {
+        font-size: 10pt;
+    }
+    > .date {
+        font-size: 10pt;
+    }
 }
 
 .content>.print:not(.colors) {

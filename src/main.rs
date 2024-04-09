@@ -44,6 +44,7 @@ async fn main() -> Result<(), std::io::Error> {
         Ok(_) => "127.0.0.1".parse().unwrap(),
         _ => "0.0.0.0".parse().unwrap(),
     };
+
     let tcp_listener = tokio::net::TcpListener::bind(net::SocketAddr::new(addr, port)).await?;
 
     let router = Router::new()

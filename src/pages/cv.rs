@@ -61,7 +61,7 @@ async fn dev_settings(expanded: Option<Query<Expandable>>) -> Response {
 }
 
 async fn content(language: Option<Path<String>>) -> impl IntoResponse {
-    let language = language.map(|p| p.0).unwrap_or("french".to_string());
+    let language = language.map(|p| p.0).unwrap_or("english".to_string());
     let lang = if language == "english" {
         Language::English
     } else {
