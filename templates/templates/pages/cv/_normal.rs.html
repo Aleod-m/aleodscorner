@@ -8,7 +8,7 @@
   hobbies_html,
 };
 
-@(ty: &str, lang: Language)
+@(lang: Language)
 <div class="no-print">
   <h1 class="h1 | full-width center clr-cyan"> Programmeur </h1>
   <span class="left-30 | f col">
@@ -30,6 +30,6 @@
     @:formation_html(lang)
   </span>
   <span class="full-width">
-    @:hobbies_html(ty, lang)
+    @:hobbies_html(lang)
   </span>
 </div>

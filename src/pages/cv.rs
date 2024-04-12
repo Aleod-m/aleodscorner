@@ -38,8 +38,6 @@ async fn header() -> impl IntoResponse {
 pub struct CVsettings {
     pub colors: String,
     pub language: String,
-    #[serde(rename = "type")]
-    pub ty: String,
 }
 
 impl Default for CVsettings {
@@ -47,7 +45,6 @@ impl Default for CVsettings {
         Self {
             colors: "dark".to_string(),
             language: "french".to_string(),
-            ty: "general".to_string(),
         }
     }
 }
@@ -75,7 +72,6 @@ async fn dev_content(settings: Option<Form<CVsettings>>) -> impl IntoResponse {
     let CVsettings {
         colors,
         language,
-        ty,
     } = settings.unwrap_or_default().0;
     let lang = if language == "english" {
         Language::English
@@ -97,6 +93,5 @@ async fn dev_content(settings: Option<Form<CVsettings>>) -> impl IntoResponse {
         pages::cv::dev_content_html,
         lang,
         color,
-        &ty
     )
 }

@@ -7,12 +7,13 @@
   formation_html,
   hobbies_html,
 };
-@(ty: &str, color: Colors, lang: Language)
+@(color: Colors, lang: Language)
 @if matches!(color, Colors::Dark) {
     <style>
     @@media print @{
       .body @{
         background-color: var(--c-bg);
+        width: 100%;
       @}
     @}
     </style>
@@ -39,6 +40,6 @@
   </span>
 
   <span class="full-width">
-    @:hobbies_html(ty, lang)
+    @:hobbies_html(lang)
   </span>
 </div>

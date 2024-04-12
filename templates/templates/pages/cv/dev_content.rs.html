@@ -13,8 +13,7 @@
 
 @(
   lang: Language,
-  colors: Colors, 
-  ty: &str
+  colors: Colors 
 )
 
 @:doctype_html()
@@ -35,8 +34,8 @@
       <div id="cv-settings" class="center"> </div>
 
       <div class="content">
-        @:_normal_html(ty, lang)
-        @:_print_html(ty, colors, lang)
+        @:_normal_html(lang)
+        @:_print_html(colors, lang)
       </div>
     </div>
   </body>

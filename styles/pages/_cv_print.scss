@@ -3,6 +3,9 @@
 @use "../partials/shape" as *;
 @use "../partials/component" as *;
 
+@page {
+    size: A4 portrait;
+}
 /* print only */
 .header, .aside, .footer, #cv-settings {
     display: none; 
@@ -33,22 +36,25 @@ hr {
     background-image: none;
     background-color: white;
     place-content: center;
+    margin-bottom: 0;
 }
 
 .content > .print {
     display: grid;
     gap: 0 $s2;
-    padding: 0 10%;
+    padding: 0 50px;
+    margin-top: min(auto, 20px);
+    margin-bottom: min(auto, 20px);
     grid-template-columns: 
-    [full-width-start left-50-start left-30-start left-60-start]
-    2fr
-    [left-30-end right-60-start middle-start]
-    1fr
-    [left-50-end right-50-start]
-    1fr
-    [left-60-end right-30-start middle-end]
-    2fr
-    [full-width-end right-50-end right-30-end right-60-end]
+        [full-width-start left-50-start left-30-start left-60-start]
+        2fr
+        [left-30-end right-60-start middle-start]
+        1fr
+        [left-50-end right-50-start]
+        1fr
+        [left-60-end right-30-start middle-end]
+        2fr
+        [full-width-end right-50-end right-30-end right-60-end]
     ;
     > {
         *, .full-width {
@@ -120,7 +126,8 @@ hr {
         }}
     }
 }
-.content>.print.colors {
+
+.content > .print.colors {
     .h2>.bi {color: $cyan;}
     .h3 { color: $cyan; }
     hr { background-color: $cyan; }
