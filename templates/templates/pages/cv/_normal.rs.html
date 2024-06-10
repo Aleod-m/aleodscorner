@@ -10,7 +10,14 @@
 
 @(lang: Language)
 <div class="no-print">
-  <h1 class="h1 | full-width center clr-cyan"> Programmeur </h1>
+  @match lang {
+    Language::French => {
+      <h1 class="h1 | full-width center clr-cyan"> Alternant en Programmation </h1>
+    }
+    Language::English=> {
+      <h1 class="h1 | full-width center clr-cyan"> Work Study Programmer </h1>
+    }
+  }
   <span class="left-30 | f col">
     @:candidat_html(lang, Version::Normal)
   </span>

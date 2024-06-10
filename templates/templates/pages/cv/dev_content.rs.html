@@ -21,6 +21,10 @@
   @:page_header_html("Dev cv page.", true, None, "cv.css")
   <body class="body">
     <div id="page-content">
+        <a
+          class="button | m-4 center no-print" 
+          href="/cv"
+        > Back to cv  </a>
       <div class="f row ic | center no-print">
         @:expandable_html({@:gear_html()}, false, "/cv/dev/settings", "#cv-settings") 
         <button 
@@ -32,6 +36,7 @@
       </div>
 
       <div id="cv-settings" class="center"> </div>
+
 
       <div class="content">
         @:_normal_html(lang)
