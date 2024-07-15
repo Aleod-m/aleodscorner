@@ -1,28 +1,3 @@
-@use crate::utils::icons::chat_html;
-@use super::{
-  _competance_html,
-};
 @use crate::Language;
 
 @(lang: Language)
-
-@match lang {
-  Language::French => {
-    <h2 class="h2" id="Langues"> @:chat_html() Langues</h2>
-    <hr/>
-    @:_competance_html(&[
-    ("Francais", 100),
-    ("Anglais", 80),
-    ("Allemand", 20),
-    ])
-  }
-  Language::English => {
-    <h2 class="h2" id="Langues"> @:chat_html() Languages</h2>
-    <hr/>
-    @:_competance_html(&[
-    ("French", 100),
-    ("English", 80),
-    ("German", 20),
-    ])
-  }
-}

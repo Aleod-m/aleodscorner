@@ -1,42 +1,7 @@
-@use crate::{Version, Language};
-@use super::parts::{
-  candidat_html,
-  programmation_html,
-  langues_html,
-  soft_skills_html,
-  formation_html,
-  hobbies_html,
-};
+@use crate::Language;
+@use super::{_layout_html};
 
-@(lang: Language)
-<div class="no-print">
-  @match lang {
-    Language::French => {
-      <h1 class="h1 | full-width center clr-cyan"> Alternant en Programmation </h1>
-    }
-    Language::English=> {
-      <h1 class="h1 | full-width center clr-cyan"> Work Study Programmer </h1>
-    }
-  }
-  <span class="left-30 | f col">
-    @:candidat_html(lang, Version::Normal)
-  </span>
-
-  <span class="middle"> 
-    @:programmation_html(lang)
-  </span>
-
-  <span class="right-30">
-    @:langues_html(lang)
-  </span>
-  <span class="full-width">
-    @:soft_skills_html(lang)
-  </span>
-
-  <span class="full-width">
-    @:formation_html(lang)
-  </span>
-  <span class="full-width">
-    @:hobbies_html(lang)
-  </span>
+@(lang: Language, position: Content)
+<div class="no-print g_cols g-4 card">
+    @:_layout_html(lang, {@:position()})
 </div>

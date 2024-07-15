@@ -1,0 +1,41 @@
+@use "../variables" as *;
+@use "../layout" as *;
+@use "../shape" as *;
+
+// Button with icon.
+.bi {
+  @include sq($rs4);
+  display: inline;
+  color: inherit;
+}
+
+.a, .h1, .h2, .h3 {
+  color: inherit;
+  &:has(>.bi) {
+    display: inline-flex;
+    height: fit-content;
+    width: fit-content;
+    flex-direction: row;
+    text-decoration: none;
+    > .bi {
+      align-self: center;
+      &+* {
+        margin-left: $rs2;
+      }
+    }
+    > .txt {
+      font-size: inherit;
+    }
+  }
+}
+
+
+.a:has(>.bi)>.txt{
+    text-decoration: underline;
+}
+
+*:not(:hover) {
+    .on-parent-hover {
+        display: none;
+    }
+}

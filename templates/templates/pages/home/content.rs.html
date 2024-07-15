@@ -1,10 +1,38 @@
-@use crate::utils::icons::arrow_clockwise_html;
 @use super::{projects_html, articles_html};
+@use crate::utils::{
+  icons::{
+    github_html,
+    envelope_at_fill_html,
+    exclamation_triangle_fill_html,
+  }
+};
+
 @()
 
-<div class="card shclr-red | mb-10 center mh-15">
-  <h3 class="h3 | clr-red"> Important </h3>
-    <p> I'm searching for an work-study position as I'm starting a work-linked masters degree in game programming at Ynov Bordeaux. If you are iterested check out my <a href="/navigate?route=/cv" class="a">CV</a> and contact me by mail.</p>
+<div id="Socials" class="f row c pv-1 g-4 | fs-l bclr-green clr-d-grey brb-4">
+  <h4 class="h4"> Socials and Contacts: </h4>
+  <a 
+    class="a | fs-l"
+    href="https://github.com/Aleod-m"
+  >
+    @:github_html()
+    <p class="txt">github.com/Aleod-m </p>
+  </a>
+  <a 
+    class="a | fs-l"
+    href="mailto:adriendml99@@protonmail.com"
+  >
+    @:envelope_at_fill_html()
+    <p class="txt"> adriendml99@@protonmail.com  </p>
+  </a>
+</div>
+
+<div class="card bclr-red | mv-10 center mh-15">
+    <h3 class="h3">
+        @:exclamation_triangle_fill_html()
+        <p class="txt">  Important  </p>
+    </h3>
+  <p> I'm searching a work-study position as I'm starting a work-linked masters degree in game programming at Ynov Bordeaux in September. If you are interested check out my <a href="/navigate?route=/cv" class="a">CV</a> and contact me by mail.</p>
 </div>
 
 <div id="Intro" class="row c">
@@ -16,7 +44,7 @@ I'm in currently searching for a job by the way, look at my <a href="/navigate?r
 
 <div class="section f col g-2">
   <h2 id="projects" class="fs-xl">
-    Projects I'm working on.
+    Projects I'm working on
   </h2>
   @:projects_html()
 </div>
@@ -24,9 +52,6 @@ I'm in currently searching for a job by the way, look at my <a href="/navigate?r
 <div class="section f col g-2">
 <h2 id="articles" class="fs-xl"> 
   Recent articles
-  <button class="btni ml-4 | on-parent-hover" style="margin-left: 1em;">
-    @:arrow_clockwise_html()
-  </button>
 </h2>
 @:articles_html()
 

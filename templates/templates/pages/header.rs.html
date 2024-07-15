@@ -1,0 +1,41 @@
+@use crate::utils::{
+  icons::{
+    house_html,
+    book_html,
+    file_person_html,
+    display_html,
+  },
+};
+
+@(current_page: &str)
+
+<nav class="f c row g-4 | fs-xxl clr-d-purple bclr-purple is">
+    <a
+      class="a p-2 | @if current_page == "home" {active}"
+      href="/home"
+    >
+      @:house_html()
+      <h1> Home </h1>
+    </a> 
+    <a
+      class="a p-2 | @if current_page == "cv" {active}"
+      href="/cv"
+    >
+      @:file_person_html()
+      <h1> CV </h1>
+    </a> 
+    <a
+      class="a p-2 | @if current_page == "projects" {active}"
+      href="/projects"
+    >
+      @:display_html()
+      <h1> Projects </h1>
+    </a> 
+    <a
+      class="a p-2 | @if current_page == "articles" {active}"
+      href="/articles"
+    >
+      @:book_html()
+      <h1> Articles </h1>
+    </a> 
+</nav>

@@ -57,11 +57,11 @@ $s15: 10rem;
 // === Font sizes ===
 
 $fsxs:  10pt;
-$fss:   14pt;
-$fsm:   16pt;
-$fsl:   20pt;
-$fsxl:  24pt;
-$fsxxl: 26pt;
+$fss:   12pt;
+$fsm:   14pt;
+$fsl:   16pt;
+$fsxl:  18pt;
+$fsxxl: 20pt;
 
 $font_sizes: (
     "xs": $fsxs,
@@ -75,27 +75,58 @@ $font_sizes: (
 
 // === Colors and gradients ===
 
+$green:  #97E023;
+$orange: #FA8419;
+$yellow: #DFD561;
+$purple: #9C64FE;
+$red:    #F3005F;
+$cyan:   #57D1EA;
+
+$m-cyan:   #236370;
+$m-red:    #A50040;
+$m-green:  #507615;
+$m-yellow: #847600;
+$m-purple: #533488;
+$m-orange: #7B4310;
+
+$d-cyan:   #062930;
+$d-red:    #400019;
+$d-green:  #2C420A;
+$d-yellow: #514900;
+$d-purple: #30204D;
+$d-orange: #542D0A;
+
+
+$white:  #F6F6EE;
+$grey:   #C4C4B5;
+$d-grey: #242420;
+$black:  #191919;
+
 $colors: (
-    "bg":     #191919,
-    "fg":     #f6f6ee,
-    "grey":   #c4c4b5,
-    "green":  #97e023,
-    "orange": #fa8419,
-    "yellow": #dfd561,
-    "purple": #9c64fe,
-    "red":    #f3005f,
-    "cyan":   #57d1ea,
+    "green":  $green,
+    "orange": $orange,
+    "yellow": $yellow,
+    "purple": $purple,
+    "red":    $red,
+    "cyan":   $cyan,
+);
+$m-colors: (
+    "m-green":  $m-green,
+    "m-orange": $m-orange,
+    "m-yellow": $m-yellow,
+    "m-purple": $m-purple,
+    "m-red":    $m-red,
+    "m-cyan":   $m-cyan,
+);
+$d-colors: (
+    "d-green":  $d-green,
+    "d-orange": $d-orange,
+    "d-yellow": $d-yellow,
+    "d-purple": $d-purple,
+    "d-red":    $d-red,
+    "d-cyan":   $d-cyan,
 );
 
-$bg:     #191919;
-$fg:     #f6f6ee;
-$grey:   #c4c4b5;
-$green:  #97e023;
-$orange: #fa8419;
-$yellow: #dfd561;
-$purple: #9c64fe;
-$red:    #f3005f;
-$cyan:   #57d1ea;
 
 @function _gengrad($start, $end) {
     $color-order: (

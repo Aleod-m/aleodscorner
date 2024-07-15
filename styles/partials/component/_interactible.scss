@@ -1,0 +1,111 @@
+@use "../variables" as *;
+@use "../shape" as *;
+@use "../layout" as *;
+@use 'sass:color';
+@use 'sass:map';
+
+@mixin hover {
+  &:not([disabled]):hover {
+    @content
+  }
+}
+
+@mixin tooltip {
+  &:not([disabled]):hover > #tooltip {
+    @content
+  }
+}
+
+@mixin shadow_grad($dir, $start, $end) {
+  position: relative;
+  transform-style: preserve-3d;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    transform: translate3d(5px, 5px, -1px);
+    background: #{lg($dir, $start, $end)};
+    filter: blur(5px);
+  }
+}
+
+@mixin loading_bar($color, $class) {
+  .bar-#{$class} {
+    @content;
+    @include pill(90%, .5em);
+    display: grid;
+    padding: $rs1;
+    position:relative;
+    >.lvl {
+      @include pill(null, 100%);
+      display: inline-block;
+      -webkit-mask:linear-gradient(#fff 0 0);
+      mask:linear-gradient(#fff 0 0);
+      &::before {
+        content: "";
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+        background-image: $color;
+      }
+    }
+
+  }
+}
+
+@mixin loading_bar_color($color, $class) {
+  .bar-#{$class} {
+    @content;
+    > .lvl::before {
+      background-image: $color;
+    }
+  }
+}
+
+.btn {
+  display: inline-flex;
+  @include row;
+  align-items: center;
+  text-decoration: none;
+  height: min-content;
+  width: min-content;
+  color: $white;
+  background-color: fade-out($white, .8);
+  border: 3px solid $white;
+  text-decoration: none;
+  border-radius: $rs2;
+  padding: $s1 $s2;
+  transition: transform 0.1s;
+  @include hover {
+    background-color: fade-out($white, .7);
+    transform: translateY(-$s1);
+  };
+}
+
+.toggle {
+  @include pill($rs7, $rs3);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 3px solid $white;
+  background-color: fade-out($white, .8);
+  padding: $s1;
+  &.off {
+    justify-content: start;
+  }
+  &.on {
+    justify-content: end;
+  }
+  @include hover {
+    &.off::after { transform: translateX($s1); }
+    &.on::after { transform: translateX(-$s1); }
+  }
+  &::after {
+    content: '';
+    @include circle($rs3);
+    background-color: $white;
+    transition: transform 0.1s;
+  }
+}

@@ -19,8 +19,7 @@
 }
 
 @mixin circle($size) {
-    @include sq($size, $rounding: 100%);
-}
-
-@mixin hover_p($parent) {
+  width: $size;
+  height: $size;
+  border-radius: 100%;
 }

@@ -1,138 +1,85 @@
 @use "../partials/variables" as *;
 @use "../partials/layout" as *;
 @use "../partials/shape" as *;
-@use "../partials/component" as *;
 
-@page {
-    size: A4 portrait;
-}
-/* print only */
-.header, .aside, .footer, #cv-settings {
-    display: none; 
-}
+@page{ size: a4;}
+
+// Print visibility.
+.header, .aside, .footer, #cv-settings { display: none; }
+.no-print, .content>.no-print { display: none; }
+.print { display: grid; }
+
 #page-content {
     width: 100%;
+    height: 100%;
     padding: 0;
 }
-.no-print, .content>.no-print {
-    display: none;
-}
-.print { display: block; }
-
-/* Text */
-.h1 { font-size: 14pt; }
-.h2 { font-size: 12pt; }
-p, a, .h3, .ilink>a, .ilink { font-size: 12pt; }
+/* Text size for print. */
+html { font-size: 8pt; }
+.h1 { font-size: 12pt; }
+.h2 { font-size: 10pt; }
+p, a, .h3, .ilink>a, .ilink { font-size: 8pt; }
 a { text-decoration: none; }
 .h3 { font-weight: bold; }
+.comp > p { font-size: 8pt; }
 
-hr {
-    height: 2px;
-    border: none;
+.sdp > {
+    .place { font-size: 8pt; }
+    .date { font-size: 8pt; }
 }
 
 /* Layout */
 .body {
     background-image: none;
     background-color: white;
-    place-content: center;
     margin-bottom: 0;
 }
 
-.content > .print {
-    display: grid;
-    gap: 0 $s2;
-    padding: 0 50px;
-    margin-top: min(auto, 20px);
-    margin-bottom: min(auto, 20px);
-    grid-template-columns: 
-        [full-width-start left-50-start left-30-start left-60-start]
-        2fr
-        [left-30-end right-60-start middle-start]
-        1fr
-        [left-50-end right-50-start]
-        1fr
-        [left-60-end right-30-start middle-end]
-        2fr
-        [full-width-end right-50-end right-30-end right-60-end]
-    ;
-    > {
-        *, .full-width {
-            grid-column: full-width;
-        }
-        .left-50 {
-            grid-column: left-50;
-        }
-        .right-50 {
-            grid-column: right-50;
-        }
-        .right-30 {
-            grid-column: right-30;
-        }
-        .right-60 {
-            grid-column: right-60;
-        }
-        .left-30 {
-            grid-column: left-30;
-        }
-        .left-60 {
-            grid-column: left-60;
-        }
-        .middle {
-            grid-column: middle;
-        }
-        .center {
-            justify-self: center;
-        }
-    }
+.content {
+    @include pt($s10);
+    @include mh(10%);
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.comp {
-    font-size: 10pt;
-}
 
-.sdp {
-    > .place {
-        font-size: 10pt;
-    }
-    > .date {
-        font-size: 10pt;
-    }
-}
-
+// Color handling.
+#contacts .a>.txt { text-decoration: none; }
+.print.g_cols { gap: $rs6; }
 .content>.print:not(.colors) {
-    p, a, h1, h2, h3 {
+  p, a, h1, h2, h3 { color: black; }
+  hr { background-color: black; }
+  .bi { color: black; }
+  .sdp > {
+    .place { color: black; }
+    .date { color: black; }
+  }
+  #photo {
+    border-color: black;
+  }
+  #contacts {
+    background-color: white;
+    box-shadow: 0px 2px black;
+    .a {color: black;} 
+  }
+  .ih2 {
+    color: black;
+    background: white;
+    box-shadow: 0px 2px black;
+    > .icon {
+      background-color: white; 
+      @include pill();
+      > .bi {
         color: black;
+      }
     }
-    hr {
-        background-color: black;
-    }
-    .bi {
-        color: black;
-    }
-    .sdp {
-        > .place {
-            color: black;
-        }
-        > .date {
-            color: black;
-        }
-    }
-    .comp {
-        font-size: 10pt;
-        > {@include loading_bar(linear-gradient($fg 0%, $fg 100%), "lvl") {
-            border: none;
-            background-color: black;
-        }}
-    }
-}
+  }
 
-.content > .print.colors {
-    .h2>.bi {color: $cyan;}
-    .h3 { color: $cyan; }
-    hr { background-color: $cyan; }
-    .ilink {
-        color: $fg;
+  .comp {
+    > p { 
+      color: black;
+      background-color: white;
+      border: 1px solid black;
     }
-    height: 100%;
+  }
 }

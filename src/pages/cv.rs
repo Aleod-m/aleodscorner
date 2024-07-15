@@ -7,6 +7,8 @@ use axum::{
 use serde::Deserialize;
 use templates::{render_template, Language, Colors};
 
+use crate::template_responders;
+
 use super::elements::{self, Expandable};
 
 pub fn setup_routing(router: Router) -> Router {
@@ -26,12 +28,9 @@ pub fn setup_routing(router: Router) -> Router {
     router
 }
 
-async fn page() -> impl IntoResponse {
-    render_template!(utils::page_html, "Curriculum Vitae", "cv", true, "cv.css")
-}
-
-async fn header() -> impl IntoResponse {
-    render_template!(pages::cv::header_html)
+template_responders! {
+    page => utils::page_html("Curriculum Vitae", "cv", true, "cv.css"),
+    header => pages::header_html("cv"),
 }
 
 #[derive(Deserialize)]

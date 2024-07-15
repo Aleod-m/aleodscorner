@@ -1,0 +1,39 @@
+@use crate::{
+  utils::icons::hourglass_split_html,
+  utils::icons::bookmark_star_fill_html,
+  utils::icons::kanban_fill_html,
+  Language,
+};
+@(lang: Language)
+@match lang {
+  Language::French => {
+    <div class="ih2 | f row fs-l">
+        <div class="icon | f c ic"> @:kanban_fill_html() </div>
+        <h2 class="h2"> Projets </h2>
+    </div>
+
+    <h3 class="h3 | mt-2"> Spoker </h3>
+    <p> Un jeu de tir á la preimère persone que je passe mon temps libre a développer avec le moteur de jeu Bevy. </p>
+
+    <h3 class="h3 | mt-2"> Site Web </h3>
+    <p> Mon site statique sur lequel je commence a ecrire des articles interactifs. (Le premier n'est pas encore sorti) </p>
+
+    <h3 class="h3 | mt-2"> Hrtml </h3>
+    <p> Un language de templating que j'ai commencé car celui que j'utilise pour mon site ne me plait pas. </p>
+  }
+  Language::English => {
+    <div class="ih2 | f row fs-l">
+        <div class="icon | f c ic"> @:kanban_fill_html() </div>
+        <h2 class="h2"> Projects </h2>
+    </div>
+
+    <h3 class="h3 | mt-2"> Spoker </h3>
+    <p> A first person arena shooter I develop in my free time. </p>
+
+    <h3 class="h3 | mt-2"> Website </h3>
+    <p> My personal website where I started to write interactive articles. (The first one is in the making) </p>
+
+    <h3 class="h3 | mt-2"> Hrtml </h3>
+    <p> An Html templating language I intend to use in the near future to replace what i use for my personal website.</p>
+  }
+}

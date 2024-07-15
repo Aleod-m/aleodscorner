@@ -1,0 +1,73 @@
+@use crate::{
+  Language,
+  utils::icons::{ 
+    chat_fill_html,
+    file_earmark_code_fill_html,
+    person_fill_gear_html,
+  },
+};
+
+@(lang: Language)
+
+<div class="ih2 | f row fs-l">
+    <div class="icon f c ic"> @:person_fill_gear_html() </div>
+    <h2 class="h2">
+    @match lang {
+      Language::French => {
+         Compétences 
+      }
+      Language::English => {
+         Hard Skills
+      }
+    }
+    </h2>
+</div>
+<div class="f col wr jsc">
+    <h3 class="h3 mt-1 asc" id="Competences"> 
+      @:file_earmark_code_fill_html()
+      <p class="txt">
+        @match lang {
+          Language::French => {
+             Programmation
+          }
+          Language::English => {
+             Programming
+          }
+        } 
+      </p>
+    </h3>
+    <div class="comp">
+      <p>Rust</p>
+      <p>Nix</p>
+      <p>Nushell</p>
+      <p>HTML</p>
+      <p>CSS</p>
+      <p>JS</p>
+      <p>C</p>
+      <p>C++</p>
+      <p>Bash</p>
+      <p>Python</p>
+      <p>Java</p>
+      <p>Ocaml</p>
+      <p>SQL</p>
+    </div>
+    @match lang {
+      Language::French => {
+    <h3 class="h3 mt-1 asc" id="Langues"> @:chat_fill_html() <p class="txt"> Langues </p> </h3>
+        <div class="comp">
+            <p>Francais</p>
+            <p>Anglais</p>
+            <p>Allemand</p>
+        </div>
+      }
+      Language::English => {
+        <h3 class="h3 mt-1 asc" id="Langues"> @:chat_fill_html() <p class="txt"> Languages </p></h3>
+        <div class="comp">
+            <p>French</p>
+            <p>English</p>
+            <p>German</p>
+        </div>
+      }
+    }
+
+</div>

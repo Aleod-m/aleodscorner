@@ -2,16 +2,16 @@
 
 
 @mixin m($size) { margin: $size; }
-@mixin mv($size) { margin: $size 0; }
-@mixin mh($size) { margin: 0 $size; }
+@mixin mv($size) { margin-top: $size; margin-bottom: $size; }
+@mixin mh($size) { margin-left: $size; margin-right: $size; }
 @mixin mt($size) { margin-top: $size; }
 @mixin mb($size) { margin-bottom: $size; }
 @mixin mr($size) { margin-right: $size; }
 @mixin ml($size) { margin-left: $size; }
 
 @mixin p($size) { padding: $size; }
-@mixin pv($size) { padding: $size 0; }
-@mixin ph($size) { padding: 0 $size; }
+@mixin pv($size) { padding-top: $size; padding-bottom: $size; }
+@mixin ph($size) { padding-left: $size; padding-right: $size; }
 @mixin pt($size) { padding-top: $size; }
 @mixin pb($size) { padding-bottom: $size; }
 @mixin pr($size) { padding-right: $size; }
@@ -25,60 +25,35 @@
     flex-direction: column; 
 }
 
-@mixin f($inline: false) {
-    @if $inline {
-      display: inline-flex;
-    } @else {
-      display: flex;
+%flex {
+  &.wr { flex-wrap: wrap; };
+  &.row { @include row(); }
+  &.col { @include col(); }
+  &.is { align-items: stretch; }
+  &.ic { align-items: center; }
+  &.c { justify-content: center; }
+  &.s { justify-content: start; }
+  &.sa { justify-content: space-around; }
+  &.w { flex-wrap: wrap; }
+  @each $name, $val in $sizes {
+    $size: #{$val}rem;
+    &.g-#{$name} { gap: $size; }
+    &.rg-#{$name} { row-gap: $size; }
+    &.cg-#{$name} { column-gap: $size; }
+    $size: #{$val}em;
+    $name: r#{$name};
+    &.g-#{$name} { gap: $size; }
+    &.rg-#{$name} { row-gap: $size; }
+    &.cg-#{$name} { column-gap: $size; }
+  }
+
+  > {
+    .center {
+      align-self: center;
     }
-
-    &.row { @include row(); }
-    &.col { @include col(); }
-    &.is { align-items: stretch; }
-    &.ic { align-items: center; }
-    &.c { justify-content: center; }
-    &.sa { justify-content: space-around; }
-    &.w { flex-wrap: wrap; }
-    @each $name, $val in $sizes {
-        $size: #{$val}rem;
-        &.g-#{$name} { gap: $size; }
-        &.rg-#{$name} { row-gap: $size; }
-        &.cg-#{$name} { column-gap: $size; }
-        $size: #{$val}em;
-        $name: r#{$name};
-        &.g-#{$name} { gap: $size; }
-        &.rg-#{$name} { row-gap: $size; }
-        &.cg-#{$name} { column-gap: $size; }
-    }
-
-    > {
-        .stretch {
-            align-self: stretch;
-        }
-        .center {
-            justify-self: center;
-            align-self: center;
-        }
-        .jss {
-            justify-self: start;
-        }
-        .jse {
-            justify-self: end;
-        }
-        .jssa {
-            justify-self: space-around;
-        }
-    }
-}
-
-%f {
-    display: flex;
-}
-
-%if {
-    display: inline-flex;
-}
-
-%g {
-    display: grid;
+    .asst { align-self: stretch; }
+    .asc { align-self: center; }
+    .ass { align-self: start; }
+    .ase { align-self: end; }
+  }
 }

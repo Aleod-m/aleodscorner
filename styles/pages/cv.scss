@@ -1,32 +1,64 @@
+@use "../partials/component/interactible" as *;
 @use "../partials/variables" as *;
 @use "../partials/shape" as *;
 @use "../partials/layout" as *;
-@use "../partials/component" as *;
 @use "sass:color";
 
 * {
-    text-align: inherit;
-    font: Arial;
+  text-align: inherit;
+  font: Arial;
 }
 
 /* Text */
-.h1, .h2, .h3 {
-    text-tranform: capitalize; 
-}
+.h1, .h2, .h3 { text-tranform: capitalize; }
 .h1 { font-size: $fsxl; }
-.h2 { font-size: $fsl; margin-top: $s2; }
+.h2 { font-size: $fsl; }
 .h3 { font-size: $fsm; font-weight: bold; }
 
-p, a:not(.btni) { font-size: $fsm; }
-
 /* Icons */
-.bi { 
-    @include sq($rs4);
-    align-self: center;
+.ih2 {
+  @include pill();
+  color: $d-cyan;
+  background: $cyan;
+  box-shadow: 0px 2px $m-cyan;
+  height: min-content;
+  > .icon {
+    height: 100%;
+    aspect-ratio: 1;
     margin-right: $rs1;
+    margin-left: $rs1;
+    @include pill();
+    > .bi {
+      margin: 0;
+      width: 70%;
+      height: 70%;
+      color: $d-cyan;
+    }
+  }
+}
+.ih2 ~ *:not(.ih2) {
+  @include mh($s4);
+  width: calc(100% - 2 * $s4);
 }
 
+#contacts {
+  @include ph($rs4);
+  @include pv($rs1);
+  background-color: $green;
+  box-shadow: 0px 2px $m-green;
+  .a { color: $black; }
+  border-radius: 9999px;
+}
+
+
 // No footer on the cv.
+#photo {
+  border-radius: 100%;
+  border: 2px solid $grey;
+  width: $rs15;
+  height: $rs15;
+}
+
 .footer { display: none; }
 
 .body {
@@ -36,116 +68,82 @@ p, a:not(.btni) { font-size: $fsm; }
 }
 
 #page-content {
-    grid-column: 2 / 3;
-    width: 90%;
-    justify-self: center;
-    @include f;
-    @include col;
-    @include pb($s12);
+  @extend %flex;
+  display: flex;
+  align-items: center;
+  @include col;
+  grid-column: 2 / 3;
+  width: 80%;
+  @include pb($s12);
+  @include ph(10%);
 }
 
 .print {
-    display: none;
+  display: none;
 }
 
 .content > .no-print {
-    display: grid;
-    gap: 0 $s2;
-    padding: 0 10%;
-    grid-template-columns: 
-        [full-width-start left-50-start left-30-start left-60-start]
-        2fr
-        [left-30-end right-60-start middle-start]
-        1fr
-        [left-50-end right-50-start]
-        1fr
-        [left-60-end right-30-start middle-end]
-        2fr
-        [full-width-end right-50-end right-30-end right-60-end]
-        ;
-
-    .h2>.bi {color: $cyan;}
-    hr { color: $cyan; }
-    .h3 { color: $cyan; }
-    a {
-        color: $green;
-        :visited {
-            color: color.scale($green, $lightness: -50%);
-        }
-    }
-    > {
-        * { 
-            grid-column: full-width; 
-        }
-        .full-width {
-            grid-column: full-width;
-        }
-        .left-50 {
-            grid-column: left-50;
-        }
-        .right-50 {
-            grid-column: right-50;
-        }
-        .right-30 {
-            grid-column: right-30;
-        }
-        .right-60 {
-            grid-column: right-60;
-        }
-        .left-30 {
-            grid-column: left-30;
-        }
-        .left-60 {
-            grid-column: left-60;
-        }
-        .middle {
-            grid-column: middle;
-        }
-        .center {
-            justify-self: center;
-        }
-    }
+  @include mh($s14);
+  aspect-ratio: 9 / 16;
+  padding: 0 5%;
+  padding-top: 5%;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: $black;
 }
 
+span > .ih2:not(:first-child) {
+  margin-top: $s4;
+}
 
-/* Level Widget. */
+// Widgets.
 .comp {
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    align-items: center;
-    column-gap: $s4;
-    > { 
-        .comp-desc { grid-column: 1/2; }
-        $grad: lg(to right, "red", "green");
-        @include loading_bar($grad, "lvl") {
-            grid-column: 2/3;
-            background-color: $bg;
-            font-size: inherit;
-            border: 1px solid $cyan;
-        }
-    }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $s2;
+  row-gap: $s1;
+  margin-top: $s1;
+  > p { 
+    font-size: $fss;
+    margin: 0;
+    @include pill;
+    background-color: $black;
+    border: 1px solid $grey;
+    padding: 0 $s3;
+    padding-bottom: $s1;
+  }
 }
 
-.soft-skill > p {
-
-}
 .sdp {
-    @include f();
-    @include row();
-    @include mv($s1);
-    align-items: baseline;
-    width: 100%;
-     > .date {
-        color: $purple;
+  display: grid;
+  @include mh($s4);
+  width: calc(100% - 2 * $s4);
+  @include mt($s1);
+  > { 
+    .h3 { 
+      width: fit-content;
+      margin-right: auto;
+      margin-left: $s2;
+      color: $cyan;
+      grid-column: 1 / 2;
     }
-    > .place {
-        margin-left: auto;
-        margin-right: 1em;
-        color: $grey;
+    .date { 
+      grid-column: 2 / 3;
+      color: $purple; 
+      margin-left: auto;
+      margin-right: $s2;
     }
+    .place {
+      grid-column: 1 / 3;
+      color: $grey;
+      margin-left: $s4;
+      margin-bottom: $s2;
+    }
+  }
 }
 
 @media print {
-    @page{ size: a4;}
-    @import "cv_print";
+  @import "cv_print";
 }

@@ -1,53 +1,73 @@
+@use "../partials/component/interactible" as *;
 @use "../partials/variables" as *;
-@use "../partials/component" as *;
 @use "../partials/layout" as *;
 
-.h3 {
-    @include mt($s4);
-}
-
 .avatar { 
-    @include mr($s4);
-    @include shadow_grad(to top, "purple", "red");
-    float: left;
-    border-radius: 5px;
-    width: 100px;
-    height: 100px;
-    &::after{
-        content:"";
-        background-image: url(/static/imgs/aleod_logo.png) ;
-        background-size: contain;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
+  @include mr($s4);
+  @include shadow_grad(to top, "purple", "red");
+  float: left;
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  &::after{
+    content:"";
+    background-image: url(/static/imgs/aleod_logo.png) ;
+    background-size: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 
-.a {
-    color: $green;
+nav > a {
+  margin: 0;
+  font-size: inherit;
+  position: relative;
+
+  &.active::before {
+    height: $s1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 0;
+    background-color: $d-purple;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    transition: height 0.1s;
+  }
+
+  &:hover::before {
+    height: $s1;
+  }
 }
 
 .header {
-    @extend %f;
-    @include col;
-    align-items: stretch;
-    .ilink {
-        color: $bg;
-    }
+  display: flex;
+  @include col;
+  align-items: stretch;
+  .ilink {
+    color: $black;
+  }
 }
 
+
+
 #page-content {
-    @extend %f;
-    @include col;
-    @include ph(10%);
-    @include mt($s10);
-    row-gap: $s4;
-    width: 80%;
-    height: 100%;
+  display: flex;
+  @include col;
+  @include ph(10%);
+  row-gap: $s4;
+  height: 100%;
 }
 
 #page {
-    @extend %g;
+  display: grid;
 }

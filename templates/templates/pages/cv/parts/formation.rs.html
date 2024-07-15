@@ -1,13 +1,16 @@
 @use crate::{
-  utils::icons::book_html,
+  utils::icons::bookmark_star_fill_html,
   Language,
 };
 @use super::_formation_html;
 @(lang: Language)
 @match lang {
   Language::French => {
-    <h2 id="Formation" class="h2 | full-width"> @:book_html() Formation </h2>
-    <hr/>
+    <div class="ih2 | f row fs-l">
+        <div class="icon | f c ic">@:bookmark_star_fill_html() </div>
+        <h2 class="h2"> Formations </h2>
+    </div>
+    <div class="sdp asc jss">
     @for (title, date, place) in &[
     ( "Master Image et Son, Année 1.", "2022-2023", "Université de Bordeaux, Talence"),
     ( "License Informatique.", "2020-2022", "Université de Bordeaux, Talence"),
@@ -17,10 +20,14 @@
     ] {
       @:_formation_html(title, date, place)
     }
+    </div>
   }
   Language::English => {
-    <h2 id="Formation" class="h2 | full-width"> @:book_html() Formation </h2>
-    <hr/>
+    <div class="ih2 | f row fs-l">
+        <div class="icon | f c ic"> @:bookmark_star_fill_html() </div>
+        <h2 class="h2"> Formations </h2>
+    </div>
+    <div class="sdp asc jss">
     @for (title, date, place) in &[
     ( "Masters Degree, Rendering and Sound, Year 1.", "2022-2023", "Université de Bordeaux, Talence"),
     ( "CS. License", "2020-2022", "Université de Bordeaux, Talence"),
@@ -30,5 +37,6 @@
     ] {
       @:_formation_html(title, date, place)
     }
+    </div>
   }
 }

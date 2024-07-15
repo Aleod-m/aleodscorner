@@ -20,27 +20,37 @@
 <html>
   @:page_header_html("Dev cv page.", true, None, "cv.css")
   <body class="body">
-    <div id="page-content">
+    <div id="page-content" class="f col ic">
         <a
-          class="button | m-4 center no-print" 
+          class="button | m-4 no-print" 
           href="/cv"
         > Back to cv  </a>
       <div class="f row ic | center no-print">
         @:expandable_html({@:gear_html()}, false, "/cv/dev/settings", "#cv-settings") 
         <button 
-          class="button | m-4 center" 
+          class="button | m-4" 
           onclick="window.print();"
         > 
           PDF
         </button>
       </div>
 
-      <div id="cv-settings" class="center"> </div>
+      <div id="cv-settings"> </div>
 
 
       <div class="content">
-        @:_normal_html(lang)
-        @:_print_html(colors, lang)
+        @:_normal_html(lang, {
+        @match lang {
+            Language::French => {Développeur}
+            Language::English => {Developper}
+        }
+        })
+        @:_print_html(colors, lang, {
+        @match lang {
+            Language::French => {Développeur}
+            Language::English => {Developper}
+        }
+        })
       </div>
     </div>
   </body>

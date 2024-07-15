@@ -1,53 +1,18 @@
-@use crate::{Version, Language, Colors};
-@use super::parts::{
-  candidat_html,
-  programmation_html,
-  langues_html,
-  soft_skills_html,
-  formation_html,
-  hobbies_html,
-};
-@(color: Colors, lang: Language)
+@use crate::{Language, Colors};
+@use super::_layout_html;
+
+@(color: Colors, lang: Language, position: Content)
 @if matches!(color, Colors::Dark) {
     <style>
     @@media print @{
       .body @{
-        background-color: var(--c-bg);
+        background-color: var(--c-black);
         width: 100%;
       @}
     @}
     </style>
 }
 
-<div class="print @if !matches!(color, Colors::Print) {colors}">
-  @match lang {
-    Language::French => {
-      <h1 class="h1 | full-width center clr-cyan"> Alternant en Programmation </h1>
-    }
-    Language::English=> {
-      <h1 class="h1 | full-width center clr-cyan"> Work Study Programmer </h1>
-    }
-  }
-  <span class="left-30 | f col">
-    @:candidat_html(lang, Version::Print)
-  </span>
-
-  <span class="middle"> 
-    @:programmation_html(lang)
-  </span>
-
-  <span class="right-30">
-    @:langues_html(lang)
-  </span>
-  <span class="full-width">
-    @:soft_skills_html(lang)
-  </span>
-
-  <span class="full-width">
-    @:formation_html(lang)
-  </span>
-
-  <span class="full-width">
-    @:hobbies_html(lang)
-  </span>
+<div class="print g_cols @if !matches!(color, Colors::Print) {colors}">
+    @:_layout_html(lang, {@:position()})
 </div>

@@ -1,0 +1,16 @@
+@use "../variables" as *;
+
+p .a {
+  color: $green;
+}
+
+.a {
+  color: inherit;
+}
+
+p, a { font-size: $fsm; }
+h1, h2, h3, h4 { text-transform: capitalize; }
+h1 { font-size: $fsxxl; }
+h2 { font-size: $fsxl; }
+h3 { font-size: $fsl; }
+h4 { font-size: $fsm; font-weight: bold; }

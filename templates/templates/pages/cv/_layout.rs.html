@@ -1,0 +1,28 @@
+@use crate::Language;
+@use super::parts::{
+  candidat_html,
+  competences_html,
+  experiences_html,
+  soft_skills_html,
+  formation_html,
+  hobbies_html,
+  projects_html,
+};
+
+@(lang: Language, position: Content)
+<span class="full-width f col ic hmc">
+  @:candidat_html(lang, {@:position()})
+</span>
+<span class="left-30 f col">
+  @:competences_html(lang)
+  @:soft_skills_html(lang)
+</span>
+<span class="right-60 f col">
+  @:formation_html(lang)
+  @:experiences_html(lang)
+</span>
+
+<span class="full-width f col">
+  @:projects_html(lang)
+  @:hobbies_html(lang)
+</span>

@@ -1,36 +1,38 @@
 @use crate::{
-  utils::icons::lightbulb_html,
+  utils::icons::lightbulb_fill_html,
   Language,
 };
 @(lang: Language)
-<h2 id="SoftSkills" class="h2 | full-width"> @:lightbulb_html() Soft Skills </h2>
-<hr class="full-width"/>
+<div class="ih2 | f row fs-l mt-2">
+    <div class="icon f c ic"> @:lightbulb_fill_html() </div>
+    <h2 class="h2"> Soft Skills </h2>
+</div>
 @match lang {
   Language::French => {
-    <p>
-      <span class="h3 | mr-1"> Stress résistant </span>
+    <h3 class="h3 | mt-1 asc tac"> Stress résistant </h3>
+    <p class="asc tac">
       Sous pression, je garde mon sang froid. Je fais face aux défis avec calme et efficacité. 
     </p>
-    <p>
-      <span class="h3 | mr-1"> Amical et Pédagogue </span>
+    <h3 class="h3 | mt-1 asc tac"> Amical et Pédagogue </h3>
+    <p class="asc tac">
       J'entretiens de bonnes relations avec les autres. Et j'apprécie de partager mes connaissances.
     </p>
-    <p>
-      <span class="h3 | mr-1"> Intéressé, curieux </span>
+    <h3 class="h3 | mt-1 asc tac"> Intéressé, curieux </h3>
+    <p class="asc tac">
       J'aime apprendre et découvrir de nouveaux sujets. 
     </p>
   }
   Language::English => {
-    <p>
-      <span class="h3 | mr-1"> Friendly and Pedagogue </span>
+    <h3 class="h3 | mt-1 asc tac"> Friendly and Knowledge Altruist </h3>
+    <p class="asc tac">
       I maintain good relationships with others. And I enjoy sharing my knowledge.
     </p>
-    <p>
-      <span class="h3 | mr-1"> Stress resilient </span>
+    <h3 class="h3 | mt-1 asc tac"> Stress resilient </h3>
+    <p class="asc tac">
       I manage pressure effectively and thrive in demanding situations.
     </p>
-    <p>
-      <span class="h3 | mr-1"> Interested, curious</span>
+    <h3 class="h3 | mt-1 asc tac"> Interested, curious</h3>
+    <p class="asc tac">
        I like to learn and discover new subjects. 
     </p>
   }

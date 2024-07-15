@@ -1,49 +1,69 @@
 @use crate::{
   Language,
-  Version,
   utils::{
-    components::ilink_html,
     icons::{
-      person_html,
-      house_html,
-      telephone_html,
-      envelope_at_html,
+      person_fill_html,
+      house_fill_html,
+      telephone_fill_html,
+      envelope_at_fill_html,
       github_html,
-      globe_html,
+      link_45deg_html,
     }
   },
 };
 
-@(lang: Language, ver: Version)
+@(lang: Language, position: Content)
 
-@match lang {
-  Language::French => {
-    <h2 class="h2" id="About"> @:person_html() Candidat</h2>
-    <hr/>
-  }
-  Language::English => {
-    <h2 class="h2" id="About"> @:person_html() Candidate</h2>
-    <hr/>
-  }
-}
-<div class="f col mt-1">
-<p>Adrien Derobert-Mazure</p>
-<div class="f row">
-    <div class="jss">
-    @:house_html()
-    </div>
-    <p> 6B allée de la Terrefort <br/> 33170 Gradignan</p>
+<div class="f row g-4">
+  <!--
+  <div id="photo" class="bclr-red clr-d-red f c ic" style="width: 150px; height: 150px; border-radius: 100%"> 
+        @:person_fill_html()
+  </div>
+-->
+  <img id="photo" src="/static/imgs/photo.jpg"/>
+  <div class="f col c ic">
+      <h1 class="h1 | sjc clr-cyan"> Adrien Derobert-Mazure </h1>
+      <h2 class="h2 | sjc tac">
+        @match lang {
+          Language::French => {
+                Alternant @:position() <br> 2 semaine sur 3 en entreprise.
+          }
+          Language::English=> {
+                Work Study @:position() <br> Working 2 out of 3 weeks.
+          }
+        }
+      </h2>
+  </div>
 </div>
-@:ilink_html({@:telephone_html()}, "tel:+33617506114", { +33617506114 })
-@:ilink_html({@:envelope_at_html()}, "mailto:adriendml99@protonmail.com", { adriendml99@@protonmail.com })
-@match ver {
-  Version::Normal => {
-    @:ilink_html({@:github_html()}, "https://www.github.com/Aleod-m", {github.com/Aleod-m})
-    @:ilink_html({@:globe_html()}, "https://www.AleodsCorner.com", {AleodsCorner.com})
-  }
-  Version::Print=> {
-    @:ilink_html({@:github_html()}, "https://www.github.com/Aleod-m", {www.github.com/Aleod-m})
-    @:ilink_html({@:globe_html()}, "https://www.AleodsCorner.com", {www.AleodsCorner.com})
-  }
-}
+
+<div id="contacts" class="f row sa wf mt-8 fs-m">
+    <a class="a" href="https://maps.app.goo.gl/H4HNmkzBwUyjB2d48"> @:house_fill_html() <p class="txt">33170 Gradignan </p> </a>
+  <a 
+    class="a"
+    href="tel:+33617506114"
+  >
+    @:telephone_fill_html()
+    <p class="txt">+33617506114</p>
+  </a>
+  <a 
+    class="a"
+    href="mailto:adriendml99@@protonmail.com"
+  >
+    @:envelope_at_fill_html() 
+    <p class="txt">  adriendml99@@proton.me  </p>
+  </a>
+  <a 
+      class="a" 
+      href="https://www.github.com/Aleod-m"
+  > 
+    @:github_html()
+    <p class="txt"> github.com/Aleod-m </p> 
+    </a>
+   <a 
+      class="a" 
+      href="https://www.AleodsCorner.com"
+  >
+    @:link_45deg_html()
+    <p class="txt"> aleodscorner.com </p> 
+  </a>
 </div>

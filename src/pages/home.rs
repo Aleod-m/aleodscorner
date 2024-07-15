@@ -15,7 +15,7 @@ pub fn setup_routing(router: axum::Router) -> axum::Router {
 }
 
 template_responders! {
-    pub header => pages::home::header_html,
+    header => pages::header_html("home"),
     content => pages::home::content_html,
 }
 

@@ -5,8 +5,8 @@
 
 @(lang: Language)
 
-<h1 class="center mv-4" > Language </h1>
-<div id="language" class="f row g-4 | center">
+<h1 class="mb-4 mt-8" > Language </h1>
+<div id="language" class="f row g-4">
   @match lang {
     Language::French => {
       Francais
@@ -20,21 +20,25 @@
     }
   }
 </div>
-<h1 class="center mv-4" > Pdfs </h1>
-<div id="language" class="f row g-4 | center">
+<h1 class="mv-4"> Pdfs </h1>
+<div id="language" class="f row g-4 mb-10">
   @match lang {
     Language::French => {
-      <a href="/static/cvs/cv_colors_fr.pdf" class="button"> Couleurs </a>
-      <a href="/static/cvs/cv_print_fr.pdf" class="button"> Imprimable </a>
+      <a href="/static/cvs/cv_colors_fr.pdf" class="btn"> Couleurs </a>
+      <a href="/static/cvs/cv_print_fr.pdf" class="btn"> Imprimable </a>
     }
     Language::English=> {
-      <a href="/static/cvs/cv_colors_en.pdf" class="button"> Colors </a>
-      <a href="/static/cvs/cv_print_en.pdf" class="button"> Printable </a>
+      <a href="/static/cvs/cv_colors_en.pdf" class="btn"> Colors </a>
+      <a href="/static/cvs/cv_print_en.pdf" class="btn"> Printable </a>
     }
   }
 </div>
 
-
-<div class="content mt-4">
-  @:_normal_html(lang)
+<div class="content">
+    @:_normal_html(lang, {
+        @match lang {
+            Language::French => {Développeur}
+            Language::English => {Developper}
+        }
+    })
 </div>

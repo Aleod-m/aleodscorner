@@ -1,31 +1,64 @@
 @use crate::utils::{
-  icons::github_html,
-  components::icolink_html,
+icons::github_html,
 };
 @()
 
-<h1 class="fs-l"> Current Project </h1>
+<h1 class="fs-l"> Current Projects </h1>
+
 <div class="card | bclr-bg">
-  <h3 class="h3">@:icolink_html({@:github_html()}, "https://github.com/Aleod-m/nix-machine") NixOs system configuration </h3>
-  <p class="desc"> I use NixOs as my operating system. As such my system configuration is a code
-    base. The README explains how the repository is structured. </p>
+  <a 
+    class="a | fs-l clr-green" 
+    href="https://github.com/Aleod-m/nix-machine"
+  >
+    @:github_html() 
+    <h3 class="h3 txt"> NixOs system configuration </h3>
+  </a>
+  <p class="desc"> I use NixOs as my operating system. As such my system configuration is a code base. The README explains how the repository is structured. </p>
 </div>
+
 <div class="card | bclr-bg">
-  <h3 class="h3">@:icolink_html({@:github_html()}, "https://github.com/Aleod-m/aleodscorner") This website </h3>
+  <a 
+    class="a | fs-l clr-green" 
+    href="https://github.com/Aleod-m/aleodscorner"
+  > 
+    @:github_html() 
+    <h3 class="h3 txt"> This website </h3>
+  </a>
   <p> This website is written in rust using the ructe templating engine axum for the server and htmx for isuing request from the client. The repository is still private as i didn't setup git secrets yet. </p>
 </div>
+
 <div class="card | bclr-bg">
-  <h3 class="h3">@:icolink_html({@:github_html()}, "https://github.com/Aleod-m/hrtml") Hrtml </h3>
+  <a 
+    class="a | fs-l clr-green" 
+    href="https://github.com/Aleod-m/hrtml"
+  >
+    @:github_html() 
+    <h3 class="h3 txt"> Hrtml </h3>
+  </a>
   <p> A templating language for rust. I intend to replace the current solution I use. As I'm dissatisfied with the quirks it has and no other templating language satisfied me because they were either to verbose in my taste or unmaintained. </p>
 </div>
+
 <div class="card | bclr-bg">
-  <h3 class="h3">@:icolink_html({@:github_html()}, "https://github.com/Aleod-m/shade") Shade </h3>
+  <a 
+    class="a | fs-l clr-green" 
+    href="https://github.com/Aleod-m/shade"
+  > 
+    @:github_html() 
+    <h3 class="h3 txt"> Shade </h3>
+  </a>
   <p> A toy functional language. The lexer is pretty much done. I'm currently working on the parser. </p>
 </div>
 
 
 <h1 class="fs-l"> Maintaining </h1>
+
 <div class="card | bclr-bg">
-  <h3 class="h3"> @:icolink_html({@:github_html()}, "https://github.com/Aleod-m/konokai") Konokai </h3>
+  <a 
+    class="a | fs-l clr-green" 
+    href="https://github.com/Aleod-m/konokai"
+  >
+    @:github_html() 
+    <h3 class="h3 txt"> Konokai </h3>
+  </a>
   <p> A neovim theme based on monokai with more vibrant colors. </p>
 </div>

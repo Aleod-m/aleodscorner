@@ -1,0 +1,34 @@
+@use "../variables" as *;
+@use "../shape" as *;
+@use "../layout" as *;
+@use 'sass:map';
+
+.card {
+    @include ph($s4);
+    @include pb($s4);
+    @include pt($s3);
+    color: $white;
+    border: 2px solid $grey;
+    box-shadow: 0 0 $s1 $grey; 
+    background-color: $black;
+    border-radius: $s4;
+    > .h3 {
+        & :has(.ico-link) {
+            @include pl($s4);
+        }
+        @include m(0);
+    }
+
+
+    @each $clr, $val in $colors {
+        &.bclr-#{$clr} { 
+          box-shadow: 0 0 $s1 $val; 
+          border: 2px solid $val;
+          background-color: map.get($m-colors, "m-#{$clr}"); 
+       }
+    }
+}
+
+.section {
+    @include mv($s4);
+}
