@@ -1,20 +1,18 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    env-nix-pkgs-proxy.url = "github:Aleod-m/env-nix-pkgs-proxy";
     nix-filter.url = "github:numtide/nix-filter";
 
     crane = {
       url = "github:ipetkov/crane";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "env-nix-pkgs-proxy/nixpkgs";
     };
 
     fenix = {
       url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-analyzer-src.follows = "";
+      inputs.nixpkgs.follows = "env-nix-pkgs-proxy/nixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {
@@ -53,6 +51,9 @@
           dart-sass
           rust-analyzer
           dive
+          elmPackages.elm
+          elmPackages.elm-format
+          elmPackages.elm-language-server
         ];
 
         SERVER_PORT = port;

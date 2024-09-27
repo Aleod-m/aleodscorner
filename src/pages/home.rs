@@ -28,3 +28,4 @@ pub async fn home() -> impl IntoResponse {
         "home.css"
     )
 }
+
